@@ -80,14 +80,18 @@ namespace NetworkController.Logic.Controller
         {
             foreach (var d in AllDeltas)
             {
-                if (d.Velocity != 0)
+                if (d.Velocity != 0 || d.Acceleration != 0)
                 {
-                    if (d.Velocity < 0.01 && d.Velocity > -0.01) d.Velocity = 0;
-                    else
+                    if (d.DeltaType == 1)
                     {
-                        d.Velocity = (VelocityRetentionFactor * d.Velocity);
+                        if (d.Velocity < 0.01 && d.Velocity > -0.01) d.Velocity = 0;
+                        else
+                        {
+                            d.Velocity = Math.Round(VelocityRetentionFactor * d.Velocity, 4);
+                        }
                     }
-                    if(!DirtiedDeltas.Contains(d)) DirtiedDeltas.Add(d);
+
+                    if (!DirtiedDeltas.Contains(d)) DirtiedDeltas.Add(d);
                 }
 
                 if (d is IDeltaGestureState)

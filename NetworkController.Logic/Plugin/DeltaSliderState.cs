@@ -46,10 +46,12 @@ namespace NetworkController.Logic.Plugin
 
         protected override void ComputeStateDeltas()
         {
+            var lastVelocity = Value - LastValue;
             LastValue = Value;
             Value = _latestValue;
-            Acceleration = Value - LastValue;
-            Velocity = Velocity + Acceleration;
+            var thisVelocity = Value - LastValue;
+            Acceleration = thisVelocity - lastVelocity;
+            Velocity = thisVelocity;
         }
     }
 }

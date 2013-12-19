@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using NetworkController.Logic.Controller;
 using System.Net.Sockets;
 using System.Net;
 
-namespace NetworkController.Logic.Server
+namespace NetworkController.Server.Logic.Udp
 {
     public class UdpBroadcaster : IDisposable
     {

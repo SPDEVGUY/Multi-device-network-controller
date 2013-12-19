@@ -31,18 +31,18 @@ namespace NetworkController.Plugin.Mouse
                 );
 
             //Deltas can be null if not found, so handle it.
-            var xAccel = xPos == null ? 0 : xPos.Acceleration;
-            var yAccel = yPos == null ? 0 : yPos.Acceleration;
+            var xDiff = xPos == null ? 0 : xPos.Velocity;
+            var yDiff = yPos == null ? 0 : yPos.Velocity;
 
             //Easier to understand logic if you make it a series of booleans...
-            var activeLeft = xAccel < -50;
-            var activeRight = xAccel > 50;
-            var activeUp = yAccel < -50;
-            var activeDown = yAccel > 50;
+            var activeLeft = xDiff < -50;
+            var activeRight = xDiff > 50;
+            var activeUp = yDiff < -50;
+            var activeDown = yDiff > 50;
             var activeOnX = activeLeft || activeRight;
             var activeOnY = activeUp || activeDown;
-            var xIntensity = (int)Math.Abs(xAccel) - 50;
-            var yIntensity = (int)Math.Abs(yAccel) - 50;
+            var xIntensity = (int)Math.Abs(xDiff) - 50;
+            var yIntensity = (int)Math.Abs(yDiff) - 50;
 
             //Now recognize gestures off of booleans
             if (activeRight && !activeOnY) AddGestureState(Constants.GestureSwipeRight, xIntensity);

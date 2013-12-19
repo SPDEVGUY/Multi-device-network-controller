@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NetworkController.Logic.Server;
+using NetworkController.Server.Logic.Udp;
 
-namespace NetworkController.ConsoleApp
+namespace NetworkController.Server.ConsoleApp
 {
     class Program
     {
@@ -27,8 +27,10 @@ namespace NetworkController.ConsoleApp
                     DumpExceptions(b.PopExceptions());
                     if (b.PacketsSent != lastPacketCont)
                     {
-                        //Console.WriteLine(">>> {0} / {1:0.00}MB", b.PacketsSent, b.PacketVolumeSent/1048576.0);
-                        Console.Write(".");
+                        Console.Clear();
+                        Console.WriteLine(">>> {0} / {1:0.00}MB", b.PacketsSent, b.PacketVolumeSent/1048576.0);
+                        Console.WriteLine("-----------");
+                        Console.WriteLine(b.LastBroadcastData.PrettifyJson());
                         lastPacketCont = b.PacketsSent;
                     }
                     Thread.Sleep(100);
@@ -80,6 +82,20 @@ namespace NetworkController.ConsoleApp
             }
 
             Console.ForegroundColor = ConsoleColor.White;
+        }
+    }
+
+
+    public static class StringExtensions
+    {
+        public static string PrettifyJson(this string input)
+        {
+            return input //Some shitty logic to newline after stuff
+                .Replace("{", "{" + Environment.NewLine)
+                .Replace("[", "{" + Environment.NewLine)
+                .Replace("}", Environment.NewLine + "}")
+                .Replace(",\"", "," + Environment.NewLine + "\t\"")
+                .Replace("]",  Environment.NewLine + "]");
         }
     }
 }

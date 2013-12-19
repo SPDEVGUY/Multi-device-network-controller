@@ -37,10 +37,12 @@ namespace NetworkController.Logic.Plugin
 
         protected override void ComputeStateDeltas()
         {
+            var lastVelocity = Intensity - LastIntensity;
             LastIntensity = Intensity;
             Intensity = _accumulatedIntensity;
-            Acceleration = Intensity - LastIntensity;
-            Velocity = Velocity + Acceleration;
+            var thisVelocity = Intensity - LastIntensity;
+            Acceleration = thisVelocity - lastVelocity;
+            Velocity = thisVelocity;
             _accumulatedIntensity = 0;
         }
     }

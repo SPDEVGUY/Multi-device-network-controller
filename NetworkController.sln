@@ -1,0 +1,125 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "NetworkController.Logic\Logic.csproj", "{02F45095-2C94-426D-9BBC-2608757D4F51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.Mouse", "NetworkController.Plugin.Mouse\Plugin.Mouse.csproj", "{45AAAEBC-2230-4819-9562-658143D999FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.Kinect", "NetworkController.Plugin.Kinect\Plugin.Kinect.csproj", "{EFFB2833-1629-4D53-B97B-0248896EDAD3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Logic", "NetworkController.Client.Logic\Client.Logic.csproj", "{C495ABB3-6390-4149-A588-2ABF3239887C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.WindowsForms", "NetworkController.Client.WindowsForms\Client.WindowsForms.csproj", "{DDCC4B95-7BD0-4510-8592-2C6AACD4C2B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.XboxControllers", "NetworkController.Plugin.XboxControllers\Plugin.XboxControllers.csproj", "{52C6F6A1-C735-493B-84B6-414DF407031F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{3D6165D9-D9F5-47F0-A96B-952EAD57F8A9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{7932EF72-3F53-4B9D-87EB-9CADE6C88B84}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{1977CFC6-FC86-4AD6-B6C4-27F65ECE01A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server.Logic", "NetworkController.Server.Logic\Server.Logic.csproj", "{7C3AE5EC-21D1-4DDF-B683-2DEA83B1386A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server.ConsoleApp", "NetworkController.Server.Console\Server.ConsoleApp.csproj", "{B1774BD0-C317-4642-B3DB-05177B78D018}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://home.uhasmy.info:8080/tfs/projects
+		SccProjectUniqueName0 = NetworkController.Client.Logic\\Client.Logic.csproj
+		SccProjectTopLevelParentUniqueName0 = NetworkController.sln
+		SccProjectName0 = NetworkController.Client.Logic
+		SccAuxPath0 = http://home.uhasmy.info:8080/tfs/projects
+		SccLocalPath0 = NetworkController.Client.Logic
+		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName1 = NetworkController.Client.WindowsForms\\Client.WindowsForms.csproj
+		SccProjectTopLevelParentUniqueName1 = NetworkController.sln
+		SccProjectName1 = NetworkController.Client.WindowsForms
+		SccAuxPath1 = http://home.uhasmy.info:8080/tfs/projects
+		SccLocalPath1 = NetworkController.Client.WindowsForms
+		SccProvider1 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName2 = NetworkController.Logic\\Logic.csproj
+		SccProjectTopLevelParentUniqueName2 = NetworkController.sln
+		SccProjectName2 = NetworkController.Logic
+		SccAuxPath2 = http://home.uhasmy.info:8080/tfs/projects
+		SccLocalPath2 = NetworkController.Logic
+		SccProvider2 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName3 = NetworkController.Plugin.Kinect\\Plugin.Kinect.csproj
+		SccProjectTopLevelParentUniqueName3 = NetworkController.sln
+		SccProjectName3 = NetworkController.Plugin.Kinect
+		SccAuxPath3 = http://home.uhasmy.info:8080/tfs/projects
+		SccLocalPath3 = NetworkController.Plugin.Kinect
+		SccProvider3 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName4 = NetworkController.Plugin.Mouse\\Plugin.Mouse.csproj
+		SccProjectTopLevelParentUniqueName4 = NetworkController.sln
+		SccProjectName4 = NetworkController.Plugin.Mouse
+		SccAuxPath4 = http://home.uhasmy.info:8080/tfs/projects
+		SccLocalPath4 = NetworkController.Plugin.Mouse
+		SccProvider4 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName5 = NetworkController.Plugin.XboxControllers\\Plugin.XboxControllers.csproj
+		SccProjectTopLevelParentUniqueName5 = NetworkController.sln
+		SccProjectName5 = NetworkController.Plugin.XboxControllers
+		SccAuxPath5 = http://home.uhasmy.info:8080/tfs/projects
+		SccLocalPath5 = NetworkController.Plugin.XboxControllers
+		SccProvider5 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName6 = NetworkController.Server.Console\\Server.ConsoleApp.csproj
+		SccProjectTopLevelParentUniqueName6 = NetworkController.sln
+		SccProjectName6 = NetworkController.Server.Console
+		SccAuxPath6 = http://home.uhasmy.info:8080/tfs/projects
+		SccLocalPath6 = NetworkController.Server.Console
+		SccProvider6 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{02F45095-2C94-426D-9BBC-2608757D4F51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02F45095-2C94-426D-9BBC-2608757D4F51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02F45095-2C94-426D-9BBC-2608757D4F51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02F45095-2C94-426D-9BBC-2608757D4F51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45AAAEBC-2230-4819-9562-658143D999FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45AAAEBC-2230-4819-9562-658143D999FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45AAAEBC-2230-4819-9562-658143D999FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45AAAEBC-2230-4819-9562-658143D999FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFFB2833-1629-4D53-B97B-0248896EDAD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFFB2833-1629-4D53-B97B-0248896EDAD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFFB2833-1629-4D53-B97B-0248896EDAD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFFB2833-1629-4D53-B97B-0248896EDAD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C495ABB3-6390-4149-A588-2ABF3239887C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C495ABB3-6390-4149-A588-2ABF3239887C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C495ABB3-6390-4149-A588-2ABF3239887C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C495ABB3-6390-4149-A588-2ABF3239887C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDCC4B95-7BD0-4510-8592-2C6AACD4C2B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDCC4B95-7BD0-4510-8592-2C6AACD4C2B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDCC4B95-7BD0-4510-8592-2C6AACD4C2B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDCC4B95-7BD0-4510-8592-2C6AACD4C2B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52C6F6A1-C735-493B-84B6-414DF407031F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52C6F6A1-C735-493B-84B6-414DF407031F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52C6F6A1-C735-493B-84B6-414DF407031F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52C6F6A1-C735-493B-84B6-414DF407031F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C3AE5EC-21D1-4DDF-B683-2DEA83B1386A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C3AE5EC-21D1-4DDF-B683-2DEA83B1386A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C3AE5EC-21D1-4DDF-B683-2DEA83B1386A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C3AE5EC-21D1-4DDF-B683-2DEA83B1386A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1774BD0-C317-4642-B3DB-05177B78D018}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1774BD0-C317-4642-B3DB-05177B78D018}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1774BD0-C317-4642-B3DB-05177B78D018}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1774BD0-C317-4642-B3DB-05177B78D018}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C495ABB3-6390-4149-A588-2ABF3239887C} = {3D6165D9-D9F5-47F0-A96B-952EAD57F8A9}
+		{DDCC4B95-7BD0-4510-8592-2C6AACD4C2B9} = {3D6165D9-D9F5-47F0-A96B-952EAD57F8A9}
+		{7C3AE5EC-21D1-4DDF-B683-2DEA83B1386A} = {7932EF72-3F53-4B9D-87EB-9CADE6C88B84}
+		{B1774BD0-C317-4642-B3DB-05177B78D018} = {7932EF72-3F53-4B9D-87EB-9CADE6C88B84}
+		{02F45095-2C94-426D-9BBC-2608757D4F51} = {1977CFC6-FC86-4AD6-B6C4-27F65ECE01A0}
+		{EFFB2833-1629-4D53-B97B-0248896EDAD3} = {1977CFC6-FC86-4AD6-B6C4-27F65ECE01A0}
+		{45AAAEBC-2230-4819-9562-658143D999FF} = {1977CFC6-FC86-4AD6-B6C4-27F65ECE01A0}
+		{52C6F6A1-C735-493B-84B6-414DF407031F} = {1977CFC6-FC86-4AD6-B6C4-27F65ECE01A0}
+	EndGlobalSection
+EndGlobal
