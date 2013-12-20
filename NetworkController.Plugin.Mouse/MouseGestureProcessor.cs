@@ -1,4 +1,5 @@
-﻿using NetworkController.Logic.Controller;
+﻿using NetworkController.Client.Logic.DataTypes.Interfaces;
+using NetworkController.Logic.Controller;
 using NetworkController.Logic.Plugin;
 using NetworkController.Logic.Plugin.Attributes;
 using NetworkController.Logic.Plugin.Interfaces;
@@ -23,12 +24,12 @@ namespace NetworkController.Plugin.Mouse
                     x =>
                     x.InputName == Constants.SliderXInputName &&
                     x.ProviderName == Constants.ProviderName
-                );
+                ) as IMeasuredDeltaState;
             var yPos = Observer.DirtiedDeltas.Find(
                     x =>
                     x.InputName == Constants.SliderYInputName &&
                     x.ProviderName == Constants.ProviderName
-                );
+                ) as IMeasuredDeltaState;
 
             //Deltas can be null if not found, so handle it.
             var xDiff = xPos == null ? 0 : xPos.Velocity;

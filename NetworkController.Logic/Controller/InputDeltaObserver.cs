@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text;
-using NetworkController.Client.Logic.Interfaces;
+using NetworkController.Client.Logic.DataTypes.Interfaces;
 using NetworkController.Logic.Plugin;
 using NetworkController.Logic.Plugin.Attributes;
 using NetworkController.Logic.Plugin.Interfaces;
@@ -19,6 +19,7 @@ namespace NetworkController.Logic.Controller
 
         //The following are used by remappers, and gesture processors
         //populated by querying all samples from Drivers.
+        public List<IDeviceState> DeviceStateQueue = new List<IDeviceState>();
         public List<IButtonState> ButtonQueue = new List<IButtonState>();
         public List<ISliderState> SliderQueue = new List<ISliderState>();
         public List<IGestureState> GestureQueue = new List<IGestureState>();
@@ -27,12 +28,14 @@ namespace NetworkController.Logic.Controller
         //The following are used to hold last final observed states
         //Can be used by gesture processor to detect movements.
         //Basically these are stateful representations of states, versus the above items which have no state
+        public Dictionary<string, Dictionary<string, IServerDeltaDeviceState>> DeltaDeviceStates = new Dictionary<string, Dictionary<string, IServerDeltaDeviceState>>();
         public Dictionary<string, Dictionary<string, IServerDeltaButtonState>> DeltaButtonStates = new Dictionary<string, Dictionary<string, IServerDeltaButtonState>>();
         public Dictionary<string, Dictionary<string, IServerDeltaSliderState>> DeltaSliderStates = new Dictionary<string, Dictionary<string, IServerDeltaSliderState>>();
         public Dictionary<string, Dictionary<string, IServerDeltaGestureState>> DeltaGestureStates = new Dictionary<string, Dictionary<string, IServerDeltaGestureState>>();
 
         public List<IServerDeltaState> DirtiedDeltas = new List<IServerDeltaState>();
         public List<IServerDeltaState> AllDeltas = new List<IServerDeltaState>();
+        public List<IServerMeasuredDeltaState> AllMeasuredDeltas = new List<IServerMeasuredDeltaState>();
 
         public double VelocityRetentionFactor = 0.97;
 
@@ -78,7 +81,7 @@ namespace NetworkController.Logic.Controller
 
         private void ReduceVelocityAndCoolOffGestures()
         {
-            foreach (var d in AllDeltas)
+            foreach (var d in AllMeasuredDeltas)
             {
                 if (d.Velocity != 0 || d.Acceleration != 0)
                 {
@@ -160,6 +163,12 @@ namespace NetworkController.Logic.Controller
 
         private void AccumulateDeltas()
         {
+            foreach (var i in DeviceStateQueue)
+            {
+                var d = GetDeviceStateDelta(i);
+                d.ApplyNewState(i);
+                if (!DirtiedDeltas.Contains(d)) DirtiedDeltas.Add(d);
+            }
             foreach (var i in ButtonQueue)
             {
                 var d = GetButtonDelta(i);
@@ -180,6 +189,28 @@ namespace NetworkController.Logic.Controller
             }
         }
 
+        private IServerDeltaDeviceState GetDeviceStateDelta(IDeviceState state)
+        {
+            if(!DeltaDeviceStates.ContainsKey(state.ProviderName))
+                DeltaDeviceStates[state.ProviderName] = new Dictionary<string, IServerDeltaDeviceState>();
+
+            if (!DeltaDeviceStates[state.ProviderName].ContainsKey(state.InputName))
+            {
+                var deltaState = new DeltaDeviceState
+                                     {
+                                         InputName = state.InputName,
+                                         ProviderName = state.ProviderName,
+                                         IsEnabled = false,
+                                         TimeDelta = 1
+                                     };
+
+                DeltaDeviceStates[state.ProviderName][state.InputName] = deltaState;
+                AllDeltas.Add(deltaState);
+                return deltaState;
+            }
+
+            return DeltaDeviceStates[state.ProviderName][state.InputName];
+        }
         private IServerDeltaButtonState GetButtonDelta(IButtonState state)
         {
             if(!DeltaButtonStates.ContainsKey(state.ProviderName))
@@ -201,6 +232,7 @@ namespace NetworkController.Logic.Controller
                 
                 DeltaButtonStates[state.ProviderName][state.InputName] = deltaState;
                 AllDeltas.Add(deltaState);
+                AllMeasuredDeltas.Add(deltaState);
                 return deltaState;
             }
 
@@ -228,6 +260,7 @@ namespace NetworkController.Logic.Controller
                 
                 DeltaSliderStates[state.ProviderName][state.InputName] = deltaState;
                 AllDeltas.Add(deltaState);
+                AllMeasuredDeltas.Add(deltaState);
                 return deltaState;
             }
 
@@ -255,6 +288,7 @@ namespace NetworkController.Logic.Controller
                 
                 DeltaGestureStates[state.ProviderName][state.InputName] = deltaState;
                 AllDeltas.Add(deltaState);
+                AllMeasuredDeltas.Add(deltaState);
                 return deltaState;
             }
 
@@ -301,6 +335,11 @@ namespace NetworkController.Logic.Controller
             foreach (var d in Drivers)
             {
                 try
+                { DeviceStateQueue.AddRange(d.PopDeviceStateQueue()); }
+                catch (Exception ex)
+                { LogProcessingException(d.GetType(), "PopDeviceStateQueue", ex); }
+
+                try
                 { ButtonQueue.AddRange(d.PopButtonQueue()); }
                 catch (Exception ex)
                 { LogProcessingException(d.GetType(), "PopButtonQueue", ex); }
@@ -325,6 +364,7 @@ namespace NetworkController.Logic.Controller
 
         private void ClearCurrentQueues()
         {
+            DeviceStateQueue.Clear();
             ButtonQueue.Clear();
             SliderQueue.Clear();
             GestureQueue.Clear();

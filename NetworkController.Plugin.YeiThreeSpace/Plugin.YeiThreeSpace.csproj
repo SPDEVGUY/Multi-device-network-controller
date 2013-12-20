@@ -4,19 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{45AAAEBC-2230-4819-9562-658143D999FF}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>0cd8890e-0faf-4096-898a-3c5e679cf25c</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NetworkController.Plugin.Mouse</RootNamespace>
-    <AssemblyName>NetworkController.Plugin.Mouse</AssemblyName>
+    <RootNamespace>NetworkController.Plugin.YeiThreeSpace</RootNamespace>
+    <AssemblyName>NetworkController.Plugin.YeiThreeSpace</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -26,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -36,7 +34,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,21 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants.cs" />
-    <Compile Include="MouseDriverAbstracter.cs" />
-    <Compile Include="MouseGestureProcessor.cs" />
-    <Compile Include="MouseInterop.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NetworkController.Client.Logic.DataTypes\Client.Logic.DataTypes.csproj">
-      <Project>{5f4604de-a1e9-459c-a02a-449bad6a79c9}</Project>
-      <Name>Client.Logic.DataTypes</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NetworkController.Logic\Logic.csproj">
-      <Project>{02f45095-2c94-426d-9bbc-2608757d4f51}</Project>
-      <Name>Logic</Name>
-    </ProjectReference>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

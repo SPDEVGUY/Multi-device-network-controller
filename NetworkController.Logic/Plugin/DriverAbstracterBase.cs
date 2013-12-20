@@ -1,4 +1,4 @@
-﻿using NetworkController.Client.Logic.Interfaces;
+﻿using NetworkController.Client.Logic.DataTypes.Interfaces;
 using NetworkController.Logic.Plugin;
 using NetworkController.Logic.Plugin.Attributes;
 using NetworkController.Logic.Plugin.Interfaces;
@@ -20,6 +20,7 @@ namespace NetworkController.Plugin.Mouse
 
         public Queue<ISliderState> SliderQueue = new Queue<ISliderState>();
         public Queue<IButtonState> ButtonQueue = new Queue<IButtonState>();
+        public Queue<IDeviceState> DeviceStateQueue = new Queue<IDeviceState>();
         public Queue<IGestureState> GestureQueue = new Queue<IGestureState>();
         protected bool CaptureThreadRunning;
         protected Thread CaptureThread;
@@ -60,6 +61,16 @@ namespace NetworkController.Plugin.Mouse
             }
         }
 
+        public List<IDeviceState> PopDeviceStateQueue()
+        {
+            lock (DeviceStateQueue)
+            {
+                var items = DeviceStateQueue.ToList();
+                DeviceStateQueue.Clear();
+                return items;
+            }
+        }
+
         public void StartCapturing()
         {
             CaptureThread.Start();
@@ -74,6 +85,7 @@ namespace NetworkController.Plugin.Mouse
             }
             SliderQueue.Clear();
             ButtonQueue.Clear();
+            DeviceStateQueue.Clear();
             GestureQueue.Clear();
         }
 
@@ -95,6 +107,7 @@ namespace NetworkController.Plugin.Mouse
 
         protected Dictionary<string, ISliderState> LastSliderValues = new Dictionary<string, ISliderState>();
         protected Dictionary<string, IButtonState> LastButtonStates = new Dictionary<string, IButtonState>();
+        protected Dictionary<string, IDeviceState> LastDeviceStates = new Dictionary<string, IDeviceState>();
 
 
         protected void AddSliderValue(string inputName, int value, int minValue, int maxValue)
@@ -134,6 +147,22 @@ namespace NetworkController.Plugin.Mouse
 
             LastButtonStates[inputName] = state;
             lock (ButtonQueue) ButtonQueue.Enqueue(state);
+        }
+        protected void AddDeviceStateValue(string inputName, bool isEnabled)
+        {
+            if (LastDeviceStates.ContainsKey(inputName))
+            {
+                if (LastDeviceStates[inputName].IsEnabled == isEnabled) return; //Ignore same values to reduce load.
+            }
+            var state = new DeviceState
+            {
+                InputName = inputName,
+                ProviderName = ProviderName,
+                IsEnabled = isEnabled,
+            };
+
+            LastDeviceStates[inputName] = state;
+            lock (DeviceStateQueue) DeviceStateQueue.Enqueue(state);
         }
 
         protected void AddGestureValue(string inputName, int intensity)

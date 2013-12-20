@@ -6,8 +6,8 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Web.Script.Serialization;
-using NetworkController.Client.Logic.Contracts;
-using NetworkController.Client.Logic.Interfaces;
+using NetworkController.Client.Logic.DataTypes.Contracts;
+using NetworkController.Client.Logic.DataTypes.Interfaces;
 
 namespace NetworkController.Client.Logic.Controllers
 {

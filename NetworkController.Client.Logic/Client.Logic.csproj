@@ -44,17 +44,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\AnyDeltaState.cs" />
-    <Compile Include="Interfaces\IButtonState.cs" />
-    <Compile Include="Interfaces\IDeltaButtonState.cs" />
-    <Compile Include="Interfaces\IDeltaGestureState.cs" />
-    <Compile Include="Interfaces\IDeltaSliderState.cs" />
-    <Compile Include="Interfaces\IDeltaState.cs" />
-    <Compile Include="Interfaces\IGestureState.cs" />
-    <Compile Include="Interfaces\ISliderState.cs" />
-    <Compile Include="Interfaces\IState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controllers\UdpReceiver.cs" />
+    <Compile Include="Udp\UdpReceiver.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NetworkController.Client.Logic.DataTypes\Client.Logic.DataTypes.csproj">
+      <Project>{5f4604de-a1e9-459c-a02a-449bad6a79c9}</Project>
+      <Name>Client.Logic.DataTypes</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

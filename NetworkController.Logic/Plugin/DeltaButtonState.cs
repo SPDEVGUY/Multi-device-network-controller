@@ -4,7 +4,8 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-using NetworkController.Client.Logic.Interfaces;
+using NetworkController.Client.Logic.DataTypes.Contracts;
+using NetworkController.Client.Logic.DataTypes.Interfaces;
 using NetworkController.Logic.Plugin.Interfaces;
 
 namespace NetworkController.Logic.Plugin
@@ -16,7 +17,7 @@ namespace NetworkController.Logic.Plugin
      */
 
     [DataContract]
-    public class DeltaButtonState : DeltaStateBase, IServerDeltaButtonState
+    public class DeltaButtonState : MeasuredDeltaStateBase, IServerDeltaButtonState
     {
         public bool IsPressed { get; set; }
         private int _accumulatedPressCount = 0;
@@ -25,7 +26,7 @@ namespace NetworkController.Logic.Plugin
 
         public DeltaButtonState()
         {
-            DeltaType =1;
+            DeltaType =DeltaTypes.Button;
         }
 
         public void ApplyNewState(IButtonState newState)

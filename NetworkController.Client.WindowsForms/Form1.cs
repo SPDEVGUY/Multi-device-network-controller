@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NetworkController.Client.Logic.Controllers;
-using NetworkController.Client.Logic.Interfaces;
+using NetworkController.Client.Logic.DataTypes.Interfaces;
 
 namespace NetworkController.Client.WindowsForms
 {

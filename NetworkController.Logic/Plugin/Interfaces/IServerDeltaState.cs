@@ -1,4 +1,4 @@
-﻿using NetworkController.Client.Logic.Interfaces;
+﻿using NetworkController.Client.Logic.DataTypes.Interfaces;
 
 namespace NetworkController.Logic.Plugin.Interfaces
 {

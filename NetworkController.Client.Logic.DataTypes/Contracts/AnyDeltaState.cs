@@ -1,11 +1,6 @@
-﻿using NetworkController.Client.Logic.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using NetworkController.Client.Logic.DataTypes.Interfaces;
 
-namespace NetworkController.Client.Logic.Contracts
+namespace NetworkController.Client.Logic.DataTypes.Contracts
 {
     /// <summary>
     /// Note: This contract is basically just a mash up of all the fields

@@ -1,6 +1,6 @@
-﻿namespace NetworkController.Client.Logic.Interfaces
+﻿namespace NetworkController.Client.Logic.DataTypes.Interfaces
 {
-    public interface IDeltaSliderState : ISliderState, IDeltaState
+    public interface IDeltaSliderState : ISliderState, IMeasuredDeltaState
     {
         /// <summary>
         /// The last value of the delta

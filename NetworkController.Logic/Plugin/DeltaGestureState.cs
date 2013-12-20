@@ -4,7 +4,8 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-using NetworkController.Client.Logic.Interfaces;
+using NetworkController.Client.Logic.DataTypes.Contracts;
+using NetworkController.Client.Logic.DataTypes.Interfaces;
 using NetworkController.Logic.Plugin.Interfaces;
 
 namespace NetworkController.Logic.Plugin
@@ -16,7 +17,7 @@ namespace NetworkController.Logic.Plugin
      */
 
     [DataContract]
-    public class DeltaGestureState : DeltaStateBase, IServerDeltaGestureState
+    public class DeltaGestureState : MeasuredDeltaStateBase, IServerDeltaGestureState
     {
         public int Intensity { get; set; }
         public int LastIntensity { get; set; }
@@ -26,7 +27,7 @@ namespace NetworkController.Logic.Plugin
 
         public DeltaGestureState()
         {
-            DeltaType = 2;
+            DeltaType = DeltaTypes.Gesture;
         }
 
         public void ApplyNewState(IGestureState newState)

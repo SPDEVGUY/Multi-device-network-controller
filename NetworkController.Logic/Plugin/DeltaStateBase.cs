@@ -12,8 +12,6 @@ namespace NetworkController.Logic.Plugin
     public abstract class DeltaStateBase : StateBase, IServerDeltaState
     {
         public byte DeltaType { get; set; }
-        public double Velocity { get; set; }
-        public double Acceleration { get; set; }
         public long TimeDelta { get; set; }
 
 

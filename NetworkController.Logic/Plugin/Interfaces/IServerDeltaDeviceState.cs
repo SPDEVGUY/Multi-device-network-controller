@@ -2,12 +2,12 @@
 
 namespace NetworkController.Logic.Plugin.Interfaces
 {
-    public interface IServerDeltaButtonState : IDeltaButtonState, IServerMeasuredDeltaState
+    public interface IServerDeltaDeviceState : IDeltaDeviceState, IServerDeltaState
     {
         /// <summary>
-        /// Apply a new button state to this delta
+        /// Apply a new state to this delta
         /// </summary>
         /// <param name="newState"></param>
-        void ApplyNewState(IButtonState newState);
+        void ApplyNewState(IDeviceState newState);
     }
 }

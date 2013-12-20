@@ -4,7 +4,8 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-using NetworkController.Client.Logic.Interfaces;
+using NetworkController.Client.Logic.DataTypes.Contracts;
+using NetworkController.Client.Logic.DataTypes.Interfaces;
 using NetworkController.Logic.Plugin.Interfaces;
 
 namespace NetworkController.Logic.Plugin
@@ -16,13 +17,13 @@ namespace NetworkController.Logic.Plugin
 
 
     [DataContract]
-    public class DeltaSliderState : DeltaStateBase, IServerDeltaSliderState
+    public class DeltaSliderState : MeasuredDeltaStateBase, IServerDeltaSliderState
     {
         public DeltaSliderState()
         {
             MaxValue = 255;
             MinValue = 0;
-            DeltaType = 0;
+            DeltaType = DeltaTypes.Slider;
         }
 
         private int _latestValue = 0;

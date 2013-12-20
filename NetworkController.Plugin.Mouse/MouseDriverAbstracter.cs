@@ -40,6 +40,12 @@ namespace NetworkController.Plugin.Mouse
 
         protected override void InitializeDriver()
         {
+            //Indicate our states are enabled
+            AddDeviceStateValue(Constants.ButtonLeftInputName,true);
+            AddDeviceStateValue(Constants.ButtonRightInputName, true);
+            AddDeviceStateValue(Constants.ButtonMiddleInputName, true);
+            AddDeviceStateValue(Constants.SliderXInputName, true);
+            AddDeviceStateValue(Constants.SliderYInputName, true);
         }
 
         protected override void DisposeDriver()

@@ -50,6 +50,10 @@
     <Compile Include="Controller\ReflectoMatic.cs" />
     <Compile Include="Plugin\Attributes\GestureProcessorAttribute.cs" />
     <Compile Include="Plugin\ButtonState.cs" />
+    <Compile Include="Plugin\Interfaces\IServerMeasuredDeltaState.cs" />
+    <Compile Include="Plugin\MeasuredDeltaStateBase.cs" />
+    <Compile Include="Plugin\DeltaDeviceState.cs" />
+    <Compile Include="Plugin\DeviceState.cs" />
     <Compile Include="Plugin\GestureProcessorBase.cs" />
     <Compile Include="Plugin\DeltaButtonState.cs" />
     <Compile Include="Plugin\DeltaGestureState.cs" />
@@ -58,6 +62,7 @@
     <Compile Include="Plugin\GestureState.cs" />
     <Compile Include="Plugin\Attributes\StateRemapperAttribute.cs" />
     <Compile Include="Plugin\Attributes\DriverAbstracterAttribute.cs" />
+    <Compile Include="Plugin\Interfaces\IServerDeltaDeviceState.cs" />
     <Compile Include="Plugin\Interfaces\IServerDeltaButtonState.cs" />
     <Compile Include="Plugin\Interfaces\IServerDeltaGestureState.cs" />
     <Compile Include="Plugin\Interfaces\IServerDeltaSliderState.cs" />
@@ -71,9 +76,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NetworkController.Client.Logic\Client.Logic.csproj">
-      <Project>{c495abb3-6390-4149-a588-2abf3239887c}</Project>
-      <Name>Client.Logic</Name>
+    <ProjectReference Include="..\NetworkController.Client.Logic.DataTypes\Client.Logic.DataTypes.csproj">
+      <Project>{5f4604de-a1e9-459c-a02a-449bad6a79c9}</Project>
+      <Name>Client.Logic.DataTypes</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-using NetworkController.Client.Logic.Interfaces;
+using NetworkController.Client.Logic.DataTypes.Interfaces;
 using NetworkController.Logic.Plugin.Interfaces;
 
 namespace NetworkController.Logic.Plugin

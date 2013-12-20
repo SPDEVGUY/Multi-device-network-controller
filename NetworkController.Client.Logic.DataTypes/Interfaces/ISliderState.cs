@@ -1,4 +1,4 @@
-﻿namespace NetworkController.Client.Logic.Interfaces
+﻿namespace NetworkController.Client.Logic.DataTypes.Interfaces
 {
     public interface ISliderState : IState
     {

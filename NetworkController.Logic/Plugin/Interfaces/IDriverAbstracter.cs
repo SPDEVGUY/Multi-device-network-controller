@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using NetworkController.Client.Logic.Interfaces;
+using NetworkController.Client.Logic.DataTypes.Interfaces;
 
 namespace NetworkController.Logic.Plugin.Interfaces
 {
@@ -29,6 +29,12 @@ namespace NetworkController.Logic.Plugin.Interfaces
         /// </summary>
         /// <returns>List of all button state changes since last access.</returns>
         List<IButtonState> PopButtonQueue();
+        
+        /// <summary>
+        /// Method to retrieve the current button states from the controller
+        /// </summary>
+        /// <returns>List of all button state changes since last access.</returns>
+        List<IDeviceState> PopDeviceStateQueue();
 
         /// <summary>
         /// Signal to driver to start capturing in it's own thread.

@@ -9,17 +9,16 @@ using NetworkController.Logic.Plugin.Interfaces;
 
 namespace NetworkController.Logic.Plugin
 {
-    [DataContract]
-    public class StateBase  :IState
-    {
-        public string InputName { get; set; }
-        public string ProviderName { get; set; }
-        public long TimeStampTicks { get; set; }
 
-        public StateBase()
-        {
-            TimeStampTicks = DateTime.Now.Ticks;
-            ProviderName = "Generic";
-        }
+    /* DeviceState
+     * -----------------
+     * Represents the enabled state of a delta
+     * The input is either enabed or disabled.
+     */
+
+    [DataContract]
+    public class DeviceState : StateBase, IDeviceState
+    {
+        public bool IsEnabled { get; set; }
     }
 }

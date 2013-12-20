@@ -60,6 +60,10 @@
     <Compile Include="Skeleframe.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NetworkController.Client.Logic.DataTypes\Client.Logic.DataTypes.csproj">
+      <Project>{5f4604de-a1e9-459c-a02a-449bad6a79c9}</Project>
+      <Name>Client.Logic.DataTypes</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NetworkController.Logic\Logic.csproj">
       <Project>{02f45095-2c94-426d-9bbc-2608757d4f51}</Project>
       <Name>Logic</Name>
