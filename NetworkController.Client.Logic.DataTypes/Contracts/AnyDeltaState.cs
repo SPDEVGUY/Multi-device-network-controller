@@ -6,7 +6,7 @@ namespace NetworkController.Client.Logic.DataTypes.Contracts
     /// Note: This contract is basically just a mash up of all the fields
     /// from all of the delta types, since JSON doesn't transmit types.
     /// </summary>
-    public class AnyDeltaState : IDeltaState, IDeltaButtonState, IDeltaGestureState, IDeltaSliderState
+    public class AnyDeltaState : IDeltaState, IDeltaButtonState, IDeltaGestureState, IDeltaSliderState, IDeltaDeviceState
     {
         public byte DeltaType { get; set; }
         public int LastValue { get; set; }
@@ -29,5 +29,8 @@ namespace NetworkController.Client.Logic.DataTypes.Contracts
         public int PressCount { get; set; }
         public int LastPressCount { get; set; }
         public bool IsPressed { get; set; }
+
+        public bool WasEnabled { get; set; }
+        public bool IsEnabled { get; set; }
     }
 }

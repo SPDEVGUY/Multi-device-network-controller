@@ -56,13 +56,17 @@
       <Project>{02f45095-2c94-426d-9bbc-2608757d4f51}</Project>
       <Name>Logic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NetworkController.Plugin.Kinect\Plugin.Kinect.csproj">
-      <Project>{effb2833-1629-4d53-b97b-0248896edad3}</Project>
-      <Name>Plugin.Kinect</Name>
-    </ProjectReference>
     <ProjectReference Include="..\NetworkController.Plugin.Mouse\Plugin.Mouse.csproj">
       <Project>{45aaaebc-2230-4819-9562-658143d999ff}</Project>
       <Name>Plugin.Mouse</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NetworkController.Plugin.XboxControllers\Plugin.XboxControllers.csproj">
+      <Project>{52c6f6a1-c735-493b-84b6-414df407031f}</Project>
+      <Name>Plugin.XboxControllers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NetworkController.Plugin.YeiThreeSpace\Plugin.YeiThreeSpace.csproj">
+      <Project>{7636b209-b715-4bcd-84a0-ff3147eaa95f}</Project>
+      <Name>Plugin.YeiThreeSpace</Name>
     </ProjectReference>
     <ProjectReference Include="..\NetworkController.Server.Logic\Server.Logic.csproj">
       <Project>{7c3ae5ec-21d1-4ddf-b683-2dea83b1386a}</Project>

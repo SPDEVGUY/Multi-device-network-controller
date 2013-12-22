@@ -37,7 +37,7 @@ namespace NetworkController.Logic.Plugin
         public void ApplyNewState(ISliderState newState)
         {
             if (newState.MaxValue > MaxValue) MaxValue = newState.MaxValue;
-            if (newState.MinValue > MinValue) MinValue = newState.MinValue;
+            if (newState.MinValue < MinValue) MinValue = newState.MinValue;
             if (newState.TimeStampTicks >= _latestTimeStamp)
             {
                 _latestValue = newState.Value;

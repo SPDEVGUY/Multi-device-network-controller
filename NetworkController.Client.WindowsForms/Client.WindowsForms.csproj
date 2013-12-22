@@ -91,6 +91,13 @@
       <Name>Client.Logic</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="icons\Stop.png" />
+    <Content Include="icons\Green.png" />
+    <Content Include="icons\Red.png" />
+    <Content Include="icons\Up.png" />
+    <Content Include="icons\Down.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

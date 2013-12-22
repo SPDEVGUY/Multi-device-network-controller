@@ -16,6 +16,7 @@ namespace NetworkController.Client.Logic.Controllers
         private Dictionary<string, IDeltaButtonState> _buttonStates = new Dictionary<string, IDeltaButtonState>();
         private Dictionary<string, IDeltaGestureState> _gestureStates = new Dictionary<string, IDeltaGestureState>();
         private Dictionary<string, IDeltaSliderState> _sliderStates = new Dictionary<string, IDeltaSliderState>();
+        private Dictionary<string, IDeltaDeviceState> _deviceStates = new Dictionary<string, IDeltaDeviceState>();
 
         private Queue<string> _rawReceiveQueue = new Queue<string>();
 
@@ -166,8 +167,12 @@ namespace NetworkController.Client.Logic.Controllers
                         lock (_buttonStates) _buttonStates[i.ProviderName + "." + i.InputName] = i;
                         break;
                         
-                    default:
+                    case 2:
                         lock (_gestureStates) _gestureStates[i.ProviderName + "." + i.InputName] = i;
+                        break;
+
+                    default:
+                        lock (_deviceStates) _deviceStates[i.ProviderName + "." + i.InputName] = i;
                         break;
                 }
             }
