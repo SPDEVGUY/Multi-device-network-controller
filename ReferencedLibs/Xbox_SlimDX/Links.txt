@@ -1,0 +1,23 @@
+Xbox Wireless controller dongle driver:
+http://support.xbox.com/en-US/xbox-on-other-devices/windows/xbox-controller-for-windows-setup#d6ed2e44f2fd4799a22e9582ef862b8a
+
+http://www.microsoft.com/hardware/en-us/downloads#gaming
+Wireless or wired:
+http://www.microsoft.com/hardware/en-us/d/xbox-360-controller-for-windows
+http://www.microsoft.com/hardware/en-us/d/xbox-360-wireless-controller-for-windows
+
+For windows 8 it should already come with support for the wireless dongle.
+
+If the dongle isn't detected you can go into device manager and manually select the driver for the unknown device.
+
+Turn off xbox controller by holding down the button:
+http://teknosrc.com/wireless-microsoft-xbox-360-controller-for-pc-power-off-with-xbox-360-controller-manager/
+
+SlimDX used for xbox controller input
+
+Download SlimDX installer:
+http://slimdx.org/download.php
+
+Usage:
+http://theinstructionlimit.com/full-xbox-360-gamepad-support-in-c-without-xna
+http://theinstructionlimit.com/wp-content/uploads/2009/06/GamepadState.cs
