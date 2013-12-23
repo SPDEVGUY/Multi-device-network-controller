@@ -7,14 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using NetworkController.Client.Logic.Controllers;
+using NetworkController.Client.Logic;
 using NetworkController.Client.Logic.DataTypes.Interfaces;
 
 namespace NetworkController.Client.WindowsForms
 {
     public partial class Form1 : Form
     {
-        public UdpReceiver Receiver;
+        public Receiver Receiver;
         public Bitmap GraphBuffer;
 
         private Dictionary<string, ListViewItem> Gestures = new Dictionary<string, ListViewItem>(); 
@@ -25,8 +25,11 @@ namespace NetworkController.Client.WindowsForms
         public Form1()
         {
             InitializeComponent();
-            Receiver = new UdpReceiver();
-            Receiver.StartListening();
+            
+            Receiver = new Receiver();
+            Receiver.Start();
+
+
             inputList.Items.Clear();
             GraphBuffer = new Bitmap(graphPicture.Width, graphPicture.Height);
             graphPicture.Image = GraphBuffer;
@@ -176,7 +179,7 @@ namespace NetworkController.Client.WindowsForms
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Receiver.StopListening();
+            Receiver.Stop();
         }
 
 
