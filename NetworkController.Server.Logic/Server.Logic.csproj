@@ -39,8 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Broadcaster.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Udp\UdpBroadcaster.cs" />
+    <Compile Include="Communicators\IPacketBroadcaster.cs" />
+    <Compile Include="Communicators\PacketBroadcasterBase.cs" />
+    <Compile Include="Communicators\UdpPacketBroadcaster.cs" />
+    <Compile Include="BroadcasterTypeEnum.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NetworkController.Client.Logic.DataTypes\Client.Logic.DataTypes.csproj">

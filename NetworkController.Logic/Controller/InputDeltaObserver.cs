@@ -179,7 +179,7 @@ namespace NetworkController.Logic.Controller
             {
                 var d = GetSliderDelta(i);
                 d.ApplyNewState(i);
-                if(!DirtiedDeltas.Contains(d))DirtiedDeltas.Add(d);
+                if(!DirtiedDeltas.Contains(d)) DirtiedDeltas.Add(d);
             }
             foreach (var i in GestureQueue)
             {

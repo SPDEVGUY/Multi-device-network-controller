@@ -1,12 +1,8 @@
 ﻿using System.IO;
 using System.Threading;
-using NetworkController.Logic.Controller;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NetworkController.Server.Logic.Udp;
+using NetworkController.Server.Logic;
 
 namespace NetworkController.Server.ConsoleApp
 {
@@ -14,16 +10,22 @@ namespace NetworkController.Server.ConsoleApp
     {
         private static bool IsRunning = false;
         private static Thread WatcherThread = new Thread(BroadcastWatcherThread) { Name = "Broadcast watcher thread"};
+
         static void BroadcastWatcherThread()
         {
             IsRunning = true;
-            using (var b = new UdpBroadcaster())
+            using (var b = new Broadcaster())
             {
-                b.StartBroadcasting();
+                b.Start();
+                
+                //TODO: Dummy code, move into config or somethin
+                b.BroadcastPort = 9050;
+                b.VelocityRetentionFactor = 0.97; 
+
+
                 long lastPacketCont = 0;
                 while (IsRunning)
                 {
-                    b.VelocityRetentionFactor = 0.97; //TODO: Dummy code, move into config or somethin
                     DumpExceptions(b.PopExceptions());
                     if (b.PacketsSent != lastPacketCont)
                     {
@@ -35,8 +37,7 @@ namespace NetworkController.Server.ConsoleApp
                     }
                     Thread.Sleep(100);
                 }
-                b.StopBroadcasting();
-
+                b.Stop();
                 Thread.Sleep(100);
                 DumpExceptions(b.PopExceptions());
             }
