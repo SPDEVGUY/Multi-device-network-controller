@@ -38,7 +38,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Extensions">
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,10 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Binds\ButtonBind.cs" />
+    <Compile Include="Binds\GestureBind.cs" />
+    <Compile Include="Binds\SliderBind.cs" />
     <Compile Include="Communicators\CommunicatorBase.cs" />
     <Compile Include="Communicators\IPacketCommunicator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Receiver.cs" />
+    <Compile Include="ReceiverSingleton.cs" />
     <Compile Include="ReceiverTypeEnum.cs" />
     <Compile Include="Communicators\UdpCommunicator.cs" />
   </ItemGroup>

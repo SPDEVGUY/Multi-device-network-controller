@@ -29,9 +29,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.YeiThreeSpace", "Net
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unity3d", "Unity3d", "{7FC633F3-4BA9-4F50-9EE7-A02AF1B53562}"
 	ProjectSection(SolutionItems) = preProject
-		NetworkController.Client.Unity3d\UDPReceive.cs = NetworkController.Client.Unity3d\UDPReceive.cs
-		NetworkController.Client.Unity3d\UDPSend.cs = NetworkController.Client.Unity3d\UDPSend.cs
+		NetworkController.Client.Unity3d\NetworkControlReceiver.cs = NetworkController.Client.Unity3d\NetworkControlReceiver.cs
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server.FormsApp", "NetworkController.Server.FormsApp\Server.FormsApp.csproj", "{71AF6E80-77ED-468E-8850-E98277F9E651}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,6 +80,10 @@ Global
 		{7636B209-B715-4BCD-84A0-FF3147EAA95F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7636B209-B715-4BCD-84A0-FF3147EAA95F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7636B209-B715-4BCD-84A0-FF3147EAA95F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71AF6E80-77ED-468E-8850-E98277F9E651}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71AF6E80-77ED-468E-8850-E98277F9E651}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71AF6E80-77ED-468E-8850-E98277F9E651}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71AF6E80-77ED-468E-8850-E98277F9E651}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -95,5 +100,6 @@ Global
 		{7FC633F3-4BA9-4F50-9EE7-A02AF1B53562} = {3D6165D9-D9F5-47F0-A96B-952EAD57F8A9}
 		{7C3AE5EC-21D1-4DDF-B683-2DEA83B1386A} = {7932EF72-3F53-4B9D-87EB-9CADE6C88B84}
 		{B1774BD0-C317-4642-B3DB-05177B78D018} = {7932EF72-3F53-4B9D-87EB-9CADE6C88B84}
+		{71AF6E80-77ED-468E-8850-E98277F9E651} = {7932EF72-3F53-4B9D-87EB-9CADE6C88B84}
 	EndGlobalSection
 EndGlobal
