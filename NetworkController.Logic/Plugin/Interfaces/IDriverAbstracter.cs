@@ -47,5 +47,10 @@ namespace NetworkController.Logic.Plugin.Interfaces
         /// Eventually IDisposable.Dispose is called, but this is where you should dispose in a cleaner sequential way.
         /// </summary>
         void StopCapturing();
+
+        /// <summary>
+        /// This method should present a form gui for controlling input for the sensor.
+        /// </summary>
+        void ShowGui();
     }
 }

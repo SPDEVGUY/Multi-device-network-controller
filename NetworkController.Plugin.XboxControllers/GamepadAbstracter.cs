@@ -116,5 +116,10 @@ namespace NetworkController.Plugin.XboxControllers
         protected override void DisposeDriver()
         {
         }
+
+        public override void ShowGui()
+        {
+            
+        }
     }
 }

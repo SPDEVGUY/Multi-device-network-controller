@@ -47,13 +47,20 @@ namespace NetworkController.Client.Logic.Communicators
         {
             if (_isListening) return;
 
-            _listenThread = new Thread(ListeningThreadMethod) { Name = "UDP Listening Thread" };
-            _processingThread = new Thread(ProcessingThreadMethod) { Name = "UDP Processing Thread" };
-            _packetsReceived = 0;
-            _isListening = true;
-            InternalOpen();
-            _listenThread.Start();
-            _processingThread.Start();
+            try
+            {
+                _listenThread = new Thread(ListeningThreadMethod) {Name = "UDP Listening Thread"};
+                _processingThread = new Thread(ProcessingThreadMethod) {Name = "UDP Processing Thread"};
+                _packetsReceived = 0;
+                _isListening = true;
+                InternalOpen();
+                _listenThread.Start();
+                _processingThread.Start();
+            }
+            catch (Exception ex)
+            {
+                LogException(ex);
+            }
         }
 
         public List<Exception> PopExceptions()

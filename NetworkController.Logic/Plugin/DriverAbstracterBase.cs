@@ -181,9 +181,7 @@ namespace NetworkController.Plugin.Mouse
         {
             if (CaptureThreadRunning) StopCapturing();
         }
-
-
-
-
+        
+        public abstract void ShowGui();
     }
 }

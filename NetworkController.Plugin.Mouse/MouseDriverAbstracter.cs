@@ -51,5 +51,10 @@ namespace NetworkController.Plugin.Mouse
         protected override void DisposeDriver()
         {
         }
+
+        public override void ShowGui()
+        {
+            
+        }
     }
 }

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using NetworkController.Logic.Controller;
+using NetworkController.Logic.Plugin.Interfaces;
 using NetworkController.Server.Logic.Communicators;
 
 namespace NetworkController.Server.Logic
@@ -22,6 +23,7 @@ namespace NetworkController.Server.Logic
         private bool _isRunning = false;
         private Thread _updateThread;
 
+        public event EventHandler DriversReady;
         public bool IsBroadcasting { get { return _communicator != null && _communicator.IsBroadcasting; } }
         public long PacketsSent { get { return _communicator == null ? 0 : _communicator.PacketsSent; } }
         public long PacketVolumeSent { get { return _communicator == null ? 0 : _communicator.PacketVolumeSent; } }
@@ -132,6 +134,8 @@ namespace NetworkController.Server.Logic
                         LogExceptions(_observer.ProcessingExceptions);
                         _communicator.Start();
 
+                        OnDriversReady();
+
                         while (_isRunning)
                         {
                             lock (this)
@@ -175,6 +179,17 @@ namespace NetworkController.Server.Logic
         private void LogExceptions(List<Exception> ex)
         {
             lock (this) _exceptions.AddRange(ex);
+        }
+
+        public List<IDriverAbstracter> GetDrivers()
+        {
+            if (_observer == null) return null;
+            return _observer.Drivers;
+        }
+
+        protected void OnDriversReady()
+        {
+            if (DriversReady != null) DriversReady(this,null);
         }
     }
 }
