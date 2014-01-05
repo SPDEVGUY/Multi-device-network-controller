@@ -1,15 +1,11 @@
 ﻿using NetworkController.Client.Logic.DataTypes.Interfaces;
-using NetworkController.Logic.Plugin;
-using NetworkController.Logic.Plugin.Attributes;
 using NetworkController.Logic.Plugin.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
-namespace NetworkController.Plugin.Mouse
+namespace NetworkController.Logic.Plugin
 {
     //Put this on your inheriting classes: [DriverAbstracter]
     public abstract class DriverAbstracterBase : IDriverAbstracter

@@ -56,6 +56,10 @@
       <Project>{02f45095-2c94-426d-9bbc-2608757d4f51}</Project>
       <Name>Logic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NetworkController.Plugin.Keyboard\Plugin.Keyboard.csproj">
+      <Project>{105c10a0-5814-48c3-962f-b9ce43be9408}</Project>
+      <Name>Plugin.Keyboard</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NetworkController.Plugin.Mouse\Plugin.Mouse.csproj">
       <Project>{45aaaebc-2230-4819-9562-658143d999ff}</Project>
       <Name>Plugin.Mouse</Name>

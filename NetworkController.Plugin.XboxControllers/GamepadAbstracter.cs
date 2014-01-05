@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using NetworkController.Logic.Plugin;
 using NetworkController.Logic.Plugin.Attributes;
-using NetworkController.Plugin.Mouse;
 using SlimDX.XInput; //NOTE: Download from here http://slimdx.org/download.php
 
 namespace NetworkController.Plugin.XboxControllers
