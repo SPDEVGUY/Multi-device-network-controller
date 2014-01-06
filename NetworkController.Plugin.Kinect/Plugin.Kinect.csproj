@@ -34,7 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Kinect, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Kinect, Version=1.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -47,15 +47,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Body.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="KinectDriverAbstracter.cs" />
-    <Compile Include="KinectRecorder.cs" />
-    <Compile Include="KinectSkeleViewer.cs">
+    <Compile Include="KinectInterop.cs" />
+    <Compile Include="KinectProcessor.cs" />
+    <Compile Include="Gui.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="KinectSkeleViewer.Designer.cs">
-      <DependentUpon>KinectSkeleViewer.cs</DependentUpon>
+    <Compile Include="Gui.Designer.cs">
+      <DependentUpon>Gui.cs</DependentUpon>
     </Compile>
-    <Compile Include="MultiKinectProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Skeleframe.cs" />
   </ItemGroup>
@@ -70,8 +72,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="KinectSkeleViewer.resx">
-      <DependentUpon>KinectSkeleViewer.cs</DependentUpon>
+    <EmbeddedResource Include="Gui.resx">
+      <DependentUpon>Gui.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,0 +1,5 @@
+http://www.microsoft.com/en-us/kinectforwindowsdev/Downloads.aspx
+
+Installed Microsoft Speech platform (x64)
+Installed Kinect developer toolkit
+Kinect SDK 1.8

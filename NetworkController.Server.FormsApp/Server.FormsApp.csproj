@@ -89,6 +89,10 @@
       <Project>{105c10a0-5814-48c3-962f-b9ce43be9408}</Project>
       <Name>Plugin.Keyboard</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NetworkController.Plugin.Kinect\Plugin.Kinect.csproj">
+      <Project>{effb2833-1629-4d53-b97b-0248896edad3}</Project>
+      <Name>Plugin.Kinect</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NetworkController.Plugin.Mouse\Plugin.Mouse.csproj">
       <Project>{45aaaebc-2230-4819-9562-658143d999ff}</Project>
       <Name>Plugin.Mouse</Name>

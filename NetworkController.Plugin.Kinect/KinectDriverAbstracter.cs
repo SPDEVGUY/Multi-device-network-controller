@@ -1,87 +1,112 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Windows.Forms;
 using Microsoft.Kinect;
+using NetworkController.Logic.Plugin;
 using NetworkController.Logic.Plugin.Attributes;
-using NetworkController.Plugin.Mouse;
 
 namespace NetworkController.Plugin.Kinect
 {
-    //Note: Kinect for windows SDK Source:
-    //http://www.microsoft.com/en-us/kinectforwindows/develop/overview.aspx
     [DriverAbstracter]
     public class KinectDriverAbstracter : DriverAbstracterBase
     {
-        private bool _isDisposing = false;
-        private KinectRecorder _recorder = new KinectRecorder();
-        private MultiKinectProcessor _processor = new MultiKinectProcessor();
-        private bool _isInitialized = false;
+        private Gui _gui;
+        public KinectProcessor Processor;
+
+        public bool SendLocalizedPositions = true;
+        public bool SendPoints = true;
+        public Dictionary<JointType, bool> SendJoint = new Dictionary<JointType, bool>();
+        
 
         public KinectDriverAbstracter()
-            : base("Kinect")
-        { }
+            : base(Constants.ProviderName)
+        {
+            var values = Enum.GetValues(typeof(JointType)) as JointType[];
+            foreach (var value in values) SendJoint[value] = true;
+        }
 
         protected override void CaptureCurrentState()
         {
-            if (!_isInitialized && !_isDisposing)
+            var bodies = Processor.GetBodies();
+
+            var ix = 0;
+            foreach (var body in bodies)
             {
-                InitializeDriver();
-            }
-            else
-            {
-                //Lazy ass code:
-                var sk = _processor.Player1;
-                if (sk.TrackingState != SkeletonTrackingState.NotTracked)
+                var name = "Body" + ix;
+                if(!body.Position.IsTracked) AddDeviceStateValue(name, false);
+                if (body.IsNew) AddDeviceStateValue(name, true);
+
+                if (body.Position.IsTracked)
                 {
-                    var p = sk.Position;
-                    AddPointToSliders("Player1", "Overall", p);
+                    AddSliderValue(name + ".X", (int) (body.Position.Position.X*1000.0));
+                    AddSliderValue(name + ".Y", (int) (body.Position.Position.Y*1000.0));
+                    AddSliderValue(name + ".Z", (int) (body.Position.Position.Z*1000.0));
+
+                    if (SendPoints)
+                    foreach (var point in body.Points)
+                    {
+                        if (SendJoint[point.Key])
+                        {
+                            var p = point.Value;
+                            var pointName = name + "." + point.Key + ".";
+
+
+                            if (p.IsTracked != p.WasTracked) AddDeviceStateValue(pointName, p.IsTracked);
+
+                            if (SendLocalizedPositions)
+                            {
+                                AddSliderValue(pointName + "X", (int) (p.LocalizedPosition.X*1000.0));
+                                AddSliderValue(pointName + "Y", (int) (p.LocalizedPosition.Y*1000.0));
+                                AddSliderValue(pointName + "Z", (int) (p.LocalizedPosition.Z*1000.0));
+                            }
+                            else
+                            {
+                                AddSliderValue(pointName + "X", (int) (p.Position.X*1000.0));
+                                AddSliderValue(pointName + "Y", (int) (p.Position.Y*1000.0));
+                                AddSliderValue(pointName + "Z", (int) (p.Position.Z*1000.0));
+                            }
+                        }
+                    }
                 }
+
+                ix++;
             }
         }
 
-        protected void AddPointToSliders(string player, string joint, SkeletonPoint p)
+        private void CaptureButtons()
         {
-            var jointPrefix = "Skeleton." + player + "." + joint + ".";
-            AddSliderValue(
-                jointPrefix  + "X",
-                (int) p.X*100
-                );
-            AddSliderValue(
-                jointPrefix + "Y",
-                (int) (p.Y*100)
-                );
-            AddSliderValue(
-                jointPrefix + "Z",
-                (int) (p.Z*100)
-                );
+           
         }
-
 
         protected override void InitializeDriver()
         {
-            _processor.Reset();
-            _recorder.StartSensing();
-            _recorder.FrameIncomming += _processor.ApplyFrame;
-            _isInitialized = true;
-            KinectSkeleViewer.CurrentRecorder = _recorder;
-            KinectSkeleViewer.CurrentProcessor = _processor;
-            KinectSkeleViewer.OpenWindow();
+            Processor = new KinectProcessor();
             
-        }
+            Processor.Start(); //TODO: Move to gui.
 
-        
-        
+            //Indicate our states are enabled
+            AddDeviceStateValue(Constants.ProviderName,false);
+        }
 
         protected override void DisposeDriver()
         {
-            _isDisposing = true;
-            _recorder.StopSensing();
-            _recorder.Dispose();
-            if (KinectSkeleViewer.CurrentForm != null)
+            if (_gui != null && _gui.Visible)
             {
-                KinectSkeleViewer.CurrentRecorder = null;
-                KinectSkeleViewer.CurrentForm.IsRunning = false;
+                if (_gui.InvokeRequired)
+                    _gui.Invoke(new MethodInvoker(() => _gui.Close()));
+                else _gui.Close();
             }
+
+            Processor.Dispose();
         }
+
+        public override void ShowGui()
+        {
+            if (_gui == null) _gui = new Gui(this);
+            _gui.Abstracter = this;
+            _gui.Show();
+            _gui.Focus();
+        }
+
     }
 }

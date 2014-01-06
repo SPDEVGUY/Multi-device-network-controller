@@ -10,13 +10,23 @@ namespace NetworkController.Plugin.Kinect
     {
         [DataMember]
         public Skeleton[] Skeletons;
+
         [DataMember]
         public Tuple<float, float, float, float> FloorClipPlane;
+
         [DataMember]
         public long TimeStamp;
+
+        [DataMember]
+        public long TimeDelta;
+
         [DataMember]
         public int SkeletonFrameNumber;
+
         [DataMember]
         public int SensorIndex;
+
+        [DataMember]
+        public string KinectId;
     }
 }

@@ -75,7 +75,7 @@ namespace NetworkController.Client.WindowsForms
                 {
                     var li = Sliders[yFrom];
                     var slider = li.Tag as IDeltaSliderState;
-                    yLocation = ((double)(slider.Value - slider.MinValue) / Math.Max(slider.MaxValue - slider.MinValue, 1));
+                    yLocation = 1-((double)(slider.Value - slider.MinValue) / Math.Max(slider.MaxValue - slider.MinValue, 1));
                 }
                 if (Sliders.ContainsKey(zFrom))
                 {
