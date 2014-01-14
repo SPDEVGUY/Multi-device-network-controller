@@ -22,7 +22,7 @@ namespace NetworkController.Plugin.Kinect
             : base(Constants.ProviderName)
         {
             var values = Enum.GetValues(typeof(JointType)) as JointType[];
-            foreach (var value in values) SendJoint[value] = true;
+            foreach (var value in values) SendJoint[value] = false;
         }
 
         protected override void CaptureCurrentState()
@@ -32,9 +32,18 @@ namespace NetworkController.Plugin.Kinect
             var ix = 0;
             foreach (var body in bodies)
             {
-                var name = "Body" + ix;
+                var name = Constants.BodyName + body.PlayerIndex;
                 if(!body.Position.IsTracked) AddDeviceStateValue(name, false);
-                if (body.IsNew) AddDeviceStateValue(name, true);
+                if (body.IsNew)
+                {
+                    AddDeviceStateValue(name, true);
+                    AddGestureValue(name + ".Hello",1);
+                }
+                if (!body.IsActive)
+                {
+                    AddDeviceStateValue(name, false);
+                    AddGestureValue(name + ".Goodbye", 1);
+                }
 
                 if (body.Position.IsTracked)
                 {
@@ -73,10 +82,6 @@ namespace NetworkController.Plugin.Kinect
             }
         }
 
-        private void CaptureButtons()
-        {
-           
-        }
 
         protected override void InitializeDriver()
         {

@@ -58,6 +58,7 @@
     <Compile Include="Gui.Designer.cs">
       <DependentUpon>Gui.cs</DependentUpon>
     </Compile>
+    <Compile Include="KinectGestureProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Skeleframe.cs" />
   </ItemGroup>

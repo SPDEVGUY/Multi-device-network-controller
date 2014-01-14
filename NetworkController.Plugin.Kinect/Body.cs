@@ -12,7 +12,9 @@ namespace NetworkController.Plugin.Kinect
         public int SensorIndex;
         public int TrackingId;
 
+        public int PlayerIndex;
         public bool IsNew;
+        internal bool _IsAdding;
         public bool IsActive;
         public DeltaPoint Position;
         public Dictionary<JointType, DeltaPoint> Points;
@@ -26,7 +28,7 @@ namespace NetworkController.Plugin.Kinect
 
             SensorIndex = 0;
             TrackingId = skele.TrackingId;
-            IsNew = true;
+            _IsAdding = true;
 
             ApplyFrame(skele);
 
@@ -94,6 +96,8 @@ namespace NetworkController.Plugin.Kinect
             }
         }
 
+
+        
     }
 
     

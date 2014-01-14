@@ -12,6 +12,7 @@ namespace NetworkController.Plugin.Kinect
         private Thread processingThread;
         private Dictionary<int, Dictionary<int, Body>> _sortedBodies = new Dictionary<int, Dictionary<int, Body>>();
         private List<Body> _bodies = new List<Body>();
+        private bool[] _takenPlayerIndexes = new bool[50];
 
         public bool IsRunning { get { return _isRunning; } }
 
@@ -19,7 +20,7 @@ namespace NetworkController.Plugin.Kinect
         {
             if (_isRunning) return;
 
-            processingThread = new Thread(KinectProcessingThread) { Name = "Kinect Processor Thread"};
+            processingThread = new Thread(KinectProcessingThread) { Name = "Kinect Processor Thread", IsBackground = true};
             processingThread.Start();
         }
 
@@ -44,6 +45,26 @@ namespace NetworkController.Plugin.Kinect
             return result;
         }
 
+
+        private int GetNextPlayerIndex()
+        {
+            for (var ix = 0; ix < _takenPlayerIndexes.Length; ix++)
+            {
+                if (_takenPlayerIndexes[ix] == false)
+                {
+                    _takenPlayerIndexes[ix] = true;
+                    return ix;
+                }
+            }
+            return -1;
+        }
+        private void FreePlayerIndex(int ix)
+        {
+            _takenPlayerIndexes[ix] = false;
+        }
+
+
+
         private void CleanUpBodies()
         {
             lock (_bodies)
@@ -60,6 +81,7 @@ namespace NetworkController.Plugin.Kinect
                         else
                         {
                             isRemoved = true;
+                            FreePlayerIndex(b.PlayerIndex);
                             _bodies.RemoveAt(ix);
                             _sortedBodies[b.SensorIndex].Remove(b.TrackingId);
                         }
@@ -67,7 +89,8 @@ namespace NetworkController.Plugin.Kinect
 
                     if (!isRemoved)
                     {
-                        b.IsNew = false;
+                        b.IsNew = b._IsAdding;
+                        b._IsAdding = false;
                         ix++;
                     }
                 }
@@ -148,6 +171,7 @@ namespace NetworkController.Plugin.Kinect
             if (!sensorSkeles.ContainsKey(id))
             {
                 body = new Body(skele);
+                body.PlayerIndex = GetNextPlayerIndex();
                 sensorSkeles[id] = body;
             }
             else

@@ -36,6 +36,7 @@
             this.sendPoints = new System.Windows.Forms.CheckedListBox();
             this.chkSendLocalizedPositions = new System.Windows.Forms.CheckBox();
             this.chkEnabled = new System.Windows.Forms.CheckBox();
+            this.btnSave = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.frontViewPB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sideViewPB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.topVewPB)).BeginInit();
@@ -112,11 +113,22 @@
             this.chkEnabled.UseVisualStyleBackColor = true;
             this.chkEnabled.CheckedChanged += new System.EventHandler(this.chkEnabled_CheckedChanged);
             // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(819, 527);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(72, 23);
+            this.btnSave.TabIndex = 7;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
             // Gui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(985, 559);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.chkEnabled);
             this.Controls.Add(this.chkSendLocalizedPositions);
             this.Controls.Add(this.sendPoints);
@@ -145,5 +157,6 @@
         private System.Windows.Forms.CheckedListBox sendPoints;
         private System.Windows.Forms.CheckBox chkSendLocalizedPositions;
         private System.Windows.Forms.CheckBox chkEnabled;
+        private System.Windows.Forms.Button btnSave;
     }
 }

@@ -19,7 +19,10 @@ namespace NetworkController.Client.WindowsForms
 
         private Dictionary<string, ListViewItem> Gestures = new Dictionary<string, ListViewItem>(); 
         private Dictionary<string, ListViewItem> Buttons= new Dictionary<string, ListViewItem>(); 
-        private Dictionary<string, ListViewItem> Sliders= new Dictionary<string, ListViewItem>(); 
+        private Dictionary<string, ListViewItem> Sliders= new Dictionary<string, ListViewItem>();
+
+        public Queue<int> GraphValues = new Queue<int>();
+        public IDeltaState GraphingDelta; 
 
 
         public Form1()
@@ -48,8 +51,26 @@ namespace NetworkController.Client.WindowsForms
             UpdateSliderStates();
             UpdateGestureStates();
 
+            UpdateGraphValueQueue();
+
             UpdatePicture();
             graphPicture.Invalidate();
+        }
+
+        private void UpdateGraphValueQueue()
+        {
+            lock (GraphValues)
+            {
+                if (GraphValues.Count > graphPicture.Width/5) GraphValues.Dequeue();
+
+                if (GraphingDelta != null)
+                {
+                    if (GraphingDelta is IDeltaButtonState)
+                        GraphValues.Enqueue(((IDeltaButtonState)GraphingDelta).PressCount);
+                    else if (GraphingDelta is IDeltaSliderState)
+                        GraphValues.Enqueue(((IDeltaSliderState)GraphingDelta).Value);
+                }
+            }
         }
 
         private void UpdatePicture()
@@ -130,6 +151,7 @@ namespace NetworkController.Client.WindowsForms
 
                 li.Tag = s;
                 li.ImageIndex = GetSliderImageIndex(s);
+                li.Text = name + " = " + s.Value;
             }
         }
         
@@ -149,6 +171,7 @@ namespace NetworkController.Client.WindowsForms
 
 
                 li.ImageIndex = GetButtonImageIndex(b);
+                li.Text = name + " = " + b.PressCount;
             }
         }
 
@@ -180,6 +203,14 @@ namespace NetworkController.Client.WindowsForms
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             Receiver.Stop();
+        }
+
+        private void inputList_ItemActivate(object sender, EventArgs e)
+        {
+            if (inputList.SelectedItems.Count > 0)
+            {
+                GraphingDelta = inputList.SelectedItems[0].Tag as IDeltaState;
+            }
         }
 
 

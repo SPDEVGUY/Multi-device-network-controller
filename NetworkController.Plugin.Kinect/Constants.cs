@@ -6,6 +6,24 @@ namespace NetworkController.Plugin.Kinect
     public class Constants
     {
         public const string ProviderName = "Kinect";
+        public const string BodyName = "Body";
+        public class Gestures
+        {
+            public const string PunchForward = "PunchForward";
+            public const string PullBack = "PullBack";
+            public const string Gesturing = "Gesturing";
+            public const string SwipeLeft = "SwipeLeft";
+            public const string SwipeRight = "SwipeRight";
+            public const string SwipeUp = "SwipeUp";
+            public const string SwipeDown = "SwipeDown";
+            public const string DodgeForward = "DodgeForward";
+            public const string DodgeBack = "DodgeBack";
+            public const string DodgeLeft = "DodgeLeft";
+            public const string DodgeRight = "DodgeRight";
+            public const string Jump = "Jump";
+            public const string Duck = "Duck";
+        }
+        
     }
     public class Vector3
     {

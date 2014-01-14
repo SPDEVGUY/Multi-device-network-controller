@@ -9,6 +9,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Kinect;
+using System.Runtime.Serialization;
+using System.IO;
 
 namespace NetworkController.Plugin.Kinect
 {
@@ -49,8 +51,12 @@ namespace NetworkController.Plugin.Kinect
 
             _jointTypes = Enum.GetValues(typeof(JointType)) as JointType[];
 
-            foreach (var value in _jointTypes) sendPoints.Items.Add(value, true);
 
+            var config = KinectConfig.Load();
+            if(config != null) config.Apply(Abstracter);
+
+
+            foreach (var value in _jointTypes) sendPoints.Items.Add(value, Abstracter.SendJoint[value]);
         }
 
         public void RenderState()
@@ -124,8 +130,79 @@ namespace NetworkController.Plugin.Kinect
             var joint = _jointTypes[e.Index];
             Abstracter.SendJoint[joint] = e.NewValue == CheckState.Checked;
         }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            var config = new KinectConfig(Abstracter);
+            config.Save();
+        }
     
     
+        [DataContract]
+        public class KinectConfig
+        {
+            [DataMember] public bool SendPoints;
+            [DataMember] public bool SendLocalized;
+            [DataMember] public List<JointType> SendingJoints;
+
+            public KinectConfig(KinectDriverAbstracter abstracter)
+            {
+                SendPoints = abstracter.SendPoints;
+                SendLocalized = abstracter.SendLocalizedPositions;
+                SendingJoints= new List<JointType>();
+                foreach (var joint in abstracter.SendJoint)
+                {
+                    if(joint.Value) SendingJoints.Add(joint.Key);
+                }
+            }
+
+            public void Save()
+            {
+                var file = "KinectConfig.txt";
+                if (File.Exists(file)) File.Delete(file);
+                using (var fs = File.OpenWrite(file))
+                {
+                    var sr = new DataContractSerializer(typeof (KinectConfig));
+                    sr.WriteObject(fs,this);
+                    fs.Close();
+                }
+            }
+
+            public static KinectConfig Load()
+            {
+                var file = "KinectConfig.txt";
+                if (!File.Exists(file)) return null;
+
+                
+                KinectConfig result;
+                using (var fs = File.OpenRead(file))
+                {
+                    try
+                    {
+                        var sr = new DataContractSerializer(typeof (KinectConfig));
+                        result = sr.ReadObject(fs) as KinectConfig;
+                    }
+                    catch
+                    {
+                        result = null;
+                    }
+                    finally
+                    {
+                        fs.Close();
+                    }
+                }
+                return result;
+            }
+
+            public void Apply(KinectDriverAbstracter abstracter)
+            {
+                abstracter.SendPoints = SendPoints;
+                abstracter.SendLocalizedPositions = SendLocalized;
+                if(SendingJoints != null)
+                foreach (var joint in SendingJoints)
+                    abstracter.SendJoint[joint] = true;
+            }
+        }
     
     }
 }

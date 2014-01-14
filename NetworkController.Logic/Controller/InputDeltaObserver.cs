@@ -153,6 +153,15 @@ namespace NetworkController.Logic.Controller
             return result.ToString();
         }
 
+        public T GetDirtiedDeltaByName<T>(string providerName, string inputName) where T : class
+        {
+            return DirtiedDeltas.Find(
+                x =>
+                x.InputName == inputName &&
+                x.ProviderName == providerName
+                       ) as T;
+        }
+
         private void FinalizeDeltas()
         {
             foreach (var i in DirtiedDeltas)

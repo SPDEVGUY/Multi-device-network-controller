@@ -104,11 +104,12 @@
             this.inputList.Location = new System.Drawing.Point(11, 22);
             this.inputList.Margin = new System.Windows.Forms.Padding(2);
             this.inputList.Name = "inputList";
-            this.inputList.Size = new System.Drawing.Size(194, 650);
+            this.inputList.Size = new System.Drawing.Size(203, 650);
             this.inputList.SmallImageList = this.iconList;
             this.inputList.TabIndex = 3;
             this.inputList.UseCompatibleStateImageBehavior = false;
             this.inputList.View = System.Windows.Forms.View.SmallIcon;
+            this.inputList.ItemActivate += new System.EventHandler(this.inputList_ItemActivate);
             // 
             // iconList
             // 
@@ -122,16 +123,16 @@
             // 
             // graphPicture
             // 
-            this.graphPicture.Location = new System.Drawing.Point(210, 47);
+            this.graphPicture.Location = new System.Drawing.Point(224, 47);
             this.graphPicture.Name = "graphPicture";
-            this.graphPicture.Size = new System.Drawing.Size(754, 624);
+            this.graphPicture.Size = new System.Drawing.Size(723, 624);
             this.graphPicture.TabIndex = 4;
             this.graphPicture.TabStop = false;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(213, 25);
+            this.label2.Location = new System.Drawing.Point(221, 25);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(17, 13);
             this.label2.TabIndex = 6;
@@ -140,7 +141,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(477, 25);
+            this.label3.Location = new System.Drawing.Point(468, 25);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(17, 13);
             this.label3.TabIndex = 8;
@@ -149,7 +150,7 @@
             // ySelect
             // 
             this.ySelect.FormattingEnabled = true;
-            this.ySelect.Location = new System.Drawing.Point(500, 22);
+            this.ySelect.Location = new System.Drawing.Point(491, 22);
             this.ySelect.MaxDropDownItems = 20;
             this.ySelect.Name = "ySelect";
             this.ySelect.Size = new System.Drawing.Size(215, 21);
@@ -158,7 +159,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(729, 25);
+            this.label4.Location = new System.Drawing.Point(712, 25);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(17, 13);
             this.label4.TabIndex = 10;
@@ -167,7 +168,7 @@
             // zSelect
             // 
             this.zSelect.FormattingEnabled = true;
-            this.zSelect.Location = new System.Drawing.Point(752, 22);
+            this.zSelect.Location = new System.Drawing.Point(735, 22);
             this.zSelect.MaxDropDownItems = 20;
             this.zSelect.Name = "zSelect";
             this.zSelect.Size = new System.Drawing.Size(212, 21);
@@ -176,7 +177,7 @@
             // xSelect
             // 
             this.xSelect.FormattingEnabled = true;
-            this.xSelect.Location = new System.Drawing.Point(236, 22);
+            this.xSelect.Location = new System.Drawing.Point(244, 22);
             this.xSelect.MaxDropDownItems = 20;
             this.xSelect.Name = "xSelect";
             this.xSelect.Size = new System.Drawing.Size(215, 21);
@@ -186,7 +187,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(976, 683);
+            this.ClientSize = new System.Drawing.Size(962, 683);
             this.Controls.Add(this.xSelect);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.zSelect);
