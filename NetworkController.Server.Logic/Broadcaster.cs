@@ -159,6 +159,7 @@ namespace NetworkController.Server.Logic
 
                         _communicator.Stop();
                         _communicator.Dispose();
+                        _communicator = null;
                     }
                     _observer.StopCapturing();
                     _observer.Dispose();
