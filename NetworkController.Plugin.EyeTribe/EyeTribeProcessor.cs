@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using System.Windows.Threading;
 using TETCSharpClient;
 using TETCSharpClient.Data;
 using TETWinControls;
@@ -16,29 +17,43 @@ namespace NetworkController.Plugin.EyeTribe
         public bool IsCalibrated;
         public CalibrationRatingEnum CalibrationRating;
         public Point2D CalibrationAreaSize = new Point2D();
+        public Correction Correction ;
+
         private bool _gazeVisible;
         private GazeDot _gazeDot;
+        private GazeDot _gazeDotCorrected;
         public bool GazeVisible
         {
             get { return _gazeVisible; }
-            set { 
+            set
+            {
                 _gazeVisible = value;
-                if (_gazeDot == null)
+                if (_gazeDot == null && value)
                 {
-                    _gazeDot = new GazeDot();
+                    _gazeDot = new GazeDot(System.Windows.Media.Color.FromRgb(255,0,0));
+                    _gazeDotCorrected = new GazeDot(System.Windows.Media.Color.FromRgb(0, 255, 255));
+                    _gazeDotCorrected.EnableCorrection = true;
                 }
-                if(_gazeVisible) _gazeDot.Show();
-                else _gazeDot.Hide();
+                if(_gazeDot != null) _gazeDot.ToggleVisibilitySafely(value);
+                if (_gazeDotCorrected != null) _gazeDotCorrected.ToggleVisibilitySafely(value);
             }
         }
 
-        public GazeDelta GazeInfo;
-
+        private GazeDelta _gazeInfo;
+        public GazeDelta GazeInfo
+        {
+            get
+            {
+                if (_gazeInfo == null) return null;
+                return _gazeInfo.Clone();
+            }
+        }
 
         public void Start()
         {
             GazeManager.Instance.Activate(1, GazeManager.ClientMode.Push);
             GazeManager.Instance.AddGazeListener(this);
+            Correction = new Correction();
 
             IsConnected = GazeManager.Instance.IsConnected;
             IsCalibrated = IsConnected && GazeManager.Instance.IsCalibrated;
@@ -55,6 +70,7 @@ namespace NetworkController.Plugin.EyeTribe
 
         public void Dispose()
         {
+            Correction.Dispose();
             Stop();
         }
 
@@ -69,6 +85,8 @@ namespace NetworkController.Plugin.EyeTribe
             CalibrationAreaSize.X = calRunner.CalibrationAreaSize.Width;
             CalibrationAreaSize.Y = calRunner.CalibrationAreaSize.Height;
         }
+
+        
         
 
         public void OnCalibrationStateChanged(bool isCalibrated)
@@ -78,8 +96,8 @@ namespace NetworkController.Plugin.EyeTribe
 
         public void OnGazeUpdate(GazeData gazeData)
         {
-            if(GazeInfo == null) GazeInfo = new GazeDelta();
-            GazeInfo.Apply(gazeData);
+            if(_gazeInfo == null) _gazeInfo = new GazeDelta();
+            _gazeInfo = _gazeInfo.Next(gazeData);
         }
 
         public void OnScreenIndexChanged(int screenIndex)

@@ -56,6 +56,8 @@
   <ItemGroup>
     <Compile Include="CalibrationRatingEnum.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Correction.cs" />
+    <Compile Include="EyeTribeExtensions.cs" />
     <Compile Include="GazeDelta.cs" />
     <Compile Include="GazeDot.xaml.cs">
       <DependentUpon>GazeDot.xaml</DependentUpon>

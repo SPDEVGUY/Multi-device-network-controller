@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Media;
 using System.Windows.Threading;
 using TETCSharpClient;
 using TETCSharpClient.Data;
@@ -8,10 +9,13 @@ namespace NetworkController.Plugin.EyeTribe
 {
 	public partial class GazeDot : IGazeUpdateListener
 	{
-		public GazeDot()
+	    public bool EnableCorrection;
+
+		public GazeDot(Color fillColor)
 		{
 			InitializeComponent();
 			GazeManager.Instance.AddGazeListener(this);
+		    Circle.Fill = new SolidColorBrush(fillColor);
 		}
 
 		public void OnScreenIndexChanged(int number)
@@ -22,7 +26,20 @@ namespace NetworkController.Plugin.EyeTribe
 		{
 		}
 
-		public void OnGazeUpdate(GazeData gazeData)
+	    public void ToggleVisibilitySafely(bool value)
+	    {
+	        if (!Dispatcher.CheckAccess())
+	        {
+	            Dispatcher.BeginInvoke(
+	                new Action(() => ToggleVisibilitySafely(value)));
+	            return;
+	        }
+            if (value) Show();
+            else Hide();
+	    }
+
+
+	    public void OnGazeUpdate(GazeData gazeData)
 		{
 			if (Dispatcher.CheckAccess() == false)
 			{
@@ -41,8 +58,16 @@ namespace NetworkController.Plugin.EyeTribe
 			//var gX = gazeData.RawCoordinates.X;
 			//var gY = gazeData.RawCoordinates.Y;
 
-			var gX = gazeData.SmoothedCoordinates.X;
-			var gY = gazeData.SmoothedCoordinates.Y;
+	        var smoothedCoordinates = gazeData.SmoothedCoordinates;
+            var gX = smoothedCoordinates.X;
+            var gY = smoothedCoordinates.Y;
+
+            if (EnableCorrection)
+            {
+                var diff = Correction.Instance.CorrectPoint(smoothedCoordinates);
+                gX = diff.X;
+                gY = diff.Y;
+            }
 
 			Left = d*x + d*gX - Width/2;
 			Top = d*y + d*gY - Height/2;

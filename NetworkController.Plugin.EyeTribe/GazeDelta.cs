@@ -11,19 +11,12 @@ namespace NetworkController.Plugin.EyeTribe
     {
         public bool IsUsable = false;
 
-        public bool WasFixated;
-        public long LastTimeStamp;
-        public bool HadPresence;
-        public bool HadGaze;
-        public bool HadFailed;
-        public bool HadLostTracking;
-        public bool HadEyes;
-        public GazeEye LastLeftEye;
-        public GazeEye LastRigthEye;
+        //TODO: Potentially get head rotation from pupil size difference
+        //TODO: fix Y axis misalignment with z distance calibration
 
-        public Point2D LastRawCoordinates;
-        public Point2D LastSmoothedCoordinates;
 
+
+        public GazeDelta Last;
         public bool IsFixated;
         public long TimeStamp;
         public bool Presence;
@@ -35,42 +28,62 @@ namespace NetworkController.Plugin.EyeTribe
         public GazeEye RightEye;
         public Point2D RawCoordinates;
         public Point2D SmoothedCoordinates;
+        public Point3D Head;
 
 
-        private void Smoosh()
+
+        public GazeDelta Next(GazeData data)
         {
-            WasFixated = IsFixated;
-            LastTimeStamp = TimeStamp;
-            HadPresence = Presence;
-            HadGaze = Gaze;
-            HadFailed = Failed;
-            HadLostTracking = LostTracking;
-            HadEyes = Eyes;
-            LastRigthEye = LeftEye;
-            LastRawCoordinates = RawCoordinates;
-            LastSmoothedCoordinates = SmoothedCoordinates;
+            if (data == null) return null;
+            var result =
+                new GazeDelta
+                    {
+                        IsFixated = data.IsFixated,
+                        TimeStamp = data.TimeStamp,
+                        Presence = (data.State & GazeData.STATE_TRACKING_PRESENCE) != 0,
+                        Gaze = (data.State & GazeData.STATE_TRACKING_PRESENCE) != 0,
+                        Failed = (data.State & GazeData.STATE_TRACKING_FAIL) != 0,
+                        LostTracking = (data.State & GazeData.STATE_TRACKING_LOST) != 0,
+                        Eyes = (data.State & GazeData.STATE_TRACKING_EYES) != 0,
+
+                        LeftEye = data.LeftEye,
+                        RightEye = data.RightEye,
+
+                        RawCoordinates = data.RawCoordinates,
+                        SmoothedCoordinates = data.SmoothedCoordinates,
+
+                        Head = data.HeadPosition(),
+
+                        IsUsable = true,
+                        Last = this
+                    };
+            Last = null;
+            return result;
         }
 
-
-        public void Apply(GazeData data)
+        public GazeDelta Clone()
         {
-            Smoosh();
-            
-            IsFixated = data.IsFixated;
-            TimeStamp = data.TimeStamp;
-            Presence = (data.State & GazeData.STATE_TRACKING_PRESENCE) != 0;
-            Gaze = (data.State & GazeData.STATE_TRACKING_PRESENCE) != 0;
-            Failed = (data.State & GazeData.STATE_TRACKING_FAIL) != 0;
-            LostTracking = (data.State & GazeData.STATE_TRACKING_LOST) != 0;
-            Eyes = (data.State & GazeData.STATE_TRACKING_EYES) != 0;
+            return new GazeDelta
+            {
+                IsFixated = IsFixated,
+                TimeStamp = TimeStamp,
+                Presence = Presence,
+                Gaze = Gaze,
+                Failed = Failed,
+                LostTracking = LostTracking,
+                Eyes = Eyes,
 
-            LeftEye = data.LeftEye;
-            RightEye = data.RightEye;
+                LeftEye = LeftEye,
+                RightEye = RightEye,
 
-            RawCoordinates = data.RawCoordinates;
-            SmoothedCoordinates = data.SmoothedCoordinates;
+                RawCoordinates = RawCoordinates,
+                SmoothedCoordinates = SmoothedCoordinates,
 
-            IsUsable = true;
+                Head = Head,
+
+                IsUsable = true,
+                Last = (Last !=null) ? Last.Clone() : null
+            };
         }
     }
 }

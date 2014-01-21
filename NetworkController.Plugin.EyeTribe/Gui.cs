@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TETCSharpClient.Data;
 
 namespace NetworkController.Plugin.EyeTribe
 {
@@ -32,6 +33,8 @@ namespace NetworkController.Plugin.EyeTribe
                                     lock (gazeImage)
                                         y.Graphics.DrawImageUnscaled(gazeImage, 0, 0);
                                 };
+
+            
             
         }
 
@@ -55,6 +58,13 @@ namespace NetworkController.Plugin.EyeTribe
             chkLeftEye.Checked = i.LeftEye != null;
             chkRightEye.Checked = i.RightEye != null;
 
+            if (i.Head != null)
+            {
+                lblHeadX.Text = i.Head.X.Round(2).ToString();
+                lblHeadY.Text = i.Head.Y.Round(2).ToString();
+                lblHeadZ.Text = i.Head.Z.Round(2).ToString();
+            }
+
             if (i.RawCoordinates != null)
             {
                 lblRawX.Text = i.RawCoordinates.X.ToString();
@@ -69,22 +79,22 @@ namespace NetworkController.Plugin.EyeTribe
             if (i.LeftEye != null)
             {
                 lblLeftPupilSize.Text = i.LeftEye.PupilSize.ToString();
-                lblLeftRawX.Text = i.LeftEye.RawCoordinates.X.ToString();
-                lblLeftRawY.Text = i.LeftEye.RawCoordinates.Y.ToString();
-                lblLeftSmoothX.Text = i.LeftEye.SmoothedCoordinates.X.ToString();
-                lblLeftSmoothY.Text = i.LeftEye.SmoothedCoordinates.Y.ToString();
-                lblLeftPupilX.Text = i.LeftEye.PupilCenterCoordinates.X.ToString();
-                lblLeftPupilY.Text = i.LeftEye.PupilCenterCoordinates.Y.ToString();
+                lblLeftRawX.Text = i.LeftEye.RawCoordinates.X.Round(2).ToString();
+                lblLeftRawY.Text = i.LeftEye.RawCoordinates.Y.Round(2).ToString();
+                lblLeftSmoothX.Text = i.LeftEye.SmoothedCoordinates.X.Round(2).ToString();
+                lblLeftSmoothY.Text = i.LeftEye.SmoothedCoordinates.Y.Round(2).ToString();
+                lblLeftPupilX.Text = i.LeftEye.PupilCenterCoordinates.X.Round(2).ToString();
+                lblLeftPupilY.Text = i.LeftEye.PupilCenterCoordinates.Y.Round(2).ToString();
             }
             if (i.RightEye != null)
             {
                 lblRightPupilSize.Text = i.RightEye.PupilSize.ToString();
-                lblRightRawX.Text = i.RightEye.RawCoordinates.X.ToString();
-                lblRightRawY.Text = i.RightEye.RawCoordinates.Y.ToString();
-                lblRightSmoothX.Text = i.RightEye.SmoothedCoordinates.X.ToString();
-                lblRightSmoothY.Text = i.RightEye.SmoothedCoordinates.Y.ToString();
-                lblRightPupilX.Text = i.RightEye.PupilCenterCoordinates.X.ToString();
-                lblRightPupilY.Text = i.RightEye.PupilCenterCoordinates.Y.ToString();
+                lblRightRawX.Text = i.RightEye.RawCoordinates.X.Round(2).ToString();
+                lblRightRawY.Text = i.RightEye.RawCoordinates.Y.Round(2).ToString();
+                lblRightSmoothX.Text = i.RightEye.SmoothedCoordinates.X.Round(2).ToString();
+                lblRightSmoothY.Text = i.RightEye.SmoothedCoordinates.Y.Round(2).ToString();
+                lblRightPupilX.Text = i.RightEye.PupilCenterCoordinates.X.Round(2).ToString();
+                lblRightPupilY.Text = i.RightEye.PupilCenterCoordinates.Y.Round(2).ToString();
             }
 
             DrawEyes();
@@ -109,39 +119,87 @@ namespace NetworkController.Plugin.EyeTribe
                     var size = 5.0d;
                     var rawPen = new Pen(Color.Gray);
                     var smoothPen = new Pen(Color.Red);
-                    if (i.RawCoordinates != null)
-                    {
-                        var x = i.RawCoordinates.X / s.X *200.0d;
-                        var y = i.RawCoordinates.Y / s.Y * 200.0d;
-                        if (i.LastRawCoordinates != null)
-                        {
-                            var _x = i.LastRawCoordinates.X / s.X * 200.0d;
-                            var _y = i.LastRawCoordinates.Y / s.Y * 200.0d;
-
-                            g.DrawLine(rawPen, (float) x, (float) y, (float) _x, (float) _y);
-                        }
-                        g.DrawEllipse(rawPen, (float) (x - size/2), (float) (y - size/2), (float) size, (float) size);
-                    }
-
-                    if (i.SmoothedCoordinates != null)
-                    {
-                        var x = i.SmoothedCoordinates.X / s.X * 200.0d;
-                        var y = i.SmoothedCoordinates.Y / s.Y * 200.0d;
-                        if (i.LastSmoothedCoordinates != null)
-                        {
-                            var _x = i.LastSmoothedCoordinates.X / s.X * 200.0d;
-                            var _y = i.LastSmoothedCoordinates.Y / s.Y * 200.0d;
-                            g.DrawLine(smoothPen, (float) x, (float) y, (float) _x, (float) _y);
-                        }
-                        g.DrawEllipse(smoothPen, (float) (x - size/2), (float) (y - size/2), (float) size, (float) size);
-                    }
+                    
+                    DrawCoordinates(g, i.Last.RawCoordinates, i.RawCoordinates, rawPen, s, size, 200.0d);
+                    DrawCoordinates(g, i.Last.SmoothedCoordinates, i.SmoothedCoordinates, smoothPen, s, size, 200.0d);
                 }
             }
         }
 
         private void DrawEyes()
         {
-            
+            lock (eyesImage)
+            {
+                using (var g = Graphics.FromImage(eyesImage))
+                {
+
+                    var i = Abstracter.Processor.GazeInfo;
+                    var s = Abstracter.Processor.CalibrationAreaSize;
+
+                    g.Clear(Color.Black);
+
+                    if(i.Last != null) DrawEye(g, i.LeftEye, i.Last.LeftEye, s);
+                    if(i.Last != null) DrawEye(g, i.RightEye, i.Last.RightEye, s);
+
+                }
+            }
+        }
+
+        private void DrawEye(Graphics g, GazeEye eye, GazeEye lastEye, Point2D calibrationAreaSize)
+        {
+            if (eye == null) return;
+
+            var rawPen = new Pen(Color.Gray);
+            var smoothPen = new Pen(Color.Red);
+            var pupilPen = new Pen(Color.Green);
+
+            Point2D lastRawCoordinates = null;
+            Point2D lastSmoothedCoordinates = null;
+            Point2D lastPupilCoordinate = null;
+
+            if (lastEye != null) lastRawCoordinates = lastEye.RawCoordinates;
+            if (lastEye != null) lastSmoothedCoordinates = lastEye.SmoothedCoordinates;
+            if (lastEye != null) lastPupilCoordinate = lastEye.PupilCenterCoordinates;
+
+            DrawCoordinates(g, lastRawCoordinates, eye.RawCoordinates, rawPen, calibrationAreaSize, eye.PupilSize,
+                            200.0d);
+            DrawCoordinates(g, lastSmoothedCoordinates, eye.SmoothedCoordinates, smoothPen, calibrationAreaSize,
+                            eye.PupilSize, 200.0d);
+
+            DrawCoordinates(g, lastPupilCoordinate, eye.PupilCenterCoordinates, pupilPen, eye.PupilSize, 200.0d);
+
+        }
+
+        private void DrawCoordinates(Graphics g, Point2D lastPoint, Point2D point, Pen pen, Point2D calibrationAreaSize, double scale, double boxSize)
+        {
+            if (point == null) return;
+
+            var x = point.X / calibrationAreaSize.X * boxSize;
+            var y = point.Y / calibrationAreaSize.Y * boxSize;
+            if (lastPoint != null)
+            {
+                var _x = lastPoint.X / calibrationAreaSize.X * boxSize;
+                var _y = lastPoint.Y / calibrationAreaSize.Y * boxSize;
+
+                g.DrawLine(pen, (float)x, (float)y, (float)_x, (float)_y);
+            }
+            g.DrawEllipse(pen, (float)(x - scale / 2), (float)(y - scale / 2), (float)scale, (float)scale);
+        }
+
+        private void DrawCoordinates(Graphics g, Point2D lastPoint, Point2D point, Pen pen, double scale, double boxSize)
+        {
+            if (point == null) return;
+
+            var x = point.X * boxSize;
+            var y = point.Y  * boxSize;
+            if (lastPoint != null)
+            {
+                var _x = lastPoint.X * boxSize;
+                var _y = lastPoint.Y * boxSize;
+
+                g.DrawLine(pen, (float)x, (float)y, (float)_x, (float)_y);
+            }
+            g.DrawEllipse(pen, (float)(x - scale / 2), (float)(y - scale / 2), (float)scale, (float)scale);
         }
 
         private void lblCalibrate_Click(object sender, EventArgs e)
@@ -162,6 +220,30 @@ namespace NetworkController.Plugin.EyeTribe
         private void Gui_FormClosed(object sender, FormClosedEventArgs e)
         {
             
+        }
+
+        
+
+
+        private void btnSweetSpot_Click(object sender, EventArgs e)
+        {
+            Correction.Instance.SetSweetSpot();
+            
+        }
+
+        private void btnOffset_Click(object sender, EventArgs e)
+        {
+            Correction.Instance.SetDeltas();
+        }
+
+        
+    }
+
+    public static class DoubleExt
+    {
+        public static Double Round(this double value, int places)
+        {
+            return Math.Round(value, places);
         }
     }
 }

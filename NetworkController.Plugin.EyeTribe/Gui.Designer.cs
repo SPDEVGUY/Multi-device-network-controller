@@ -87,6 +87,15 @@
             this.lblRightPupilY = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.lblRightPupilX = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.lblHeadZ = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.lblHeadX = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.lblHeadY = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.btnSweetSpot = new System.Windows.Forms.Button();
+            this.btnOffset = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbEyes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbGaze)).BeginInit();
             this.SuspendLayout();
@@ -94,7 +103,7 @@
             // chkShowGaze
             // 
             this.chkShowGaze.AutoSize = true;
-            this.chkShowGaze.Location = new System.Drawing.Point(128, 55);
+            this.chkShowGaze.Location = new System.Drawing.Point(763, 12);
             this.chkShowGaze.Name = "chkShowGaze";
             this.chkShowGaze.Size = new System.Drawing.Size(101, 17);
             this.chkShowGaze.TabIndex = 0;
@@ -192,7 +201,7 @@
             // 
             this.chkFixated.AutoSize = true;
             this.chkFixated.Enabled = false;
-            this.chkFixated.Location = new System.Drawing.Point(427, 160);
+            this.chkFixated.Location = new System.Drawing.Point(430, 177);
             this.chkFixated.Name = "chkFixated";
             this.chkFixated.Size = new System.Drawing.Size(60, 17);
             this.chkFixated.TabIndex = 9;
@@ -202,7 +211,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(424, 98);
+            this.label5.Location = new System.Drawing.Point(427, 115);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(37, 13);
             this.label5.TabIndex = 10;
@@ -212,7 +221,7 @@
             // 
             this.chkPresence.AutoSize = true;
             this.chkPresence.Enabled = false;
-            this.chkPresence.Location = new System.Drawing.Point(427, 114);
+            this.chkPresence.Location = new System.Drawing.Point(430, 131);
             this.chkPresence.Name = "chkPresence";
             this.chkPresence.Size = new System.Drawing.Size(71, 17);
             this.chkPresence.TabIndex = 11;
@@ -223,7 +232,7 @@
             // 
             this.chkGaze.AutoSize = true;
             this.chkGaze.Enabled = false;
-            this.chkGaze.Location = new System.Drawing.Point(427, 137);
+            this.chkGaze.Location = new System.Drawing.Point(430, 154);
             this.chkGaze.Name = "chkGaze";
             this.chkGaze.Size = new System.Drawing.Size(51, 17);
             this.chkGaze.TabIndex = 12;
@@ -234,7 +243,7 @@
             // 
             this.chkFailed.AutoSize = true;
             this.chkFailed.Enabled = false;
-            this.chkFailed.Location = new System.Drawing.Point(427, 183);
+            this.chkFailed.Location = new System.Drawing.Point(430, 200);
             this.chkFailed.Name = "chkFailed";
             this.chkFailed.Size = new System.Drawing.Size(54, 17);
             this.chkFailed.TabIndex = 13;
@@ -245,7 +254,7 @@
             // 
             this.chkLostTracking.AutoSize = true;
             this.chkLostTracking.Enabled = false;
-            this.chkLostTracking.Location = new System.Drawing.Point(427, 206);
+            this.chkLostTracking.Location = new System.Drawing.Point(430, 223);
             this.chkLostTracking.Name = "chkLostTracking";
             this.chkLostTracking.Size = new System.Drawing.Size(91, 17);
             this.chkLostTracking.TabIndex = 14;
@@ -256,7 +265,7 @@
             // 
             this.chkLeftEye.AutoSize = true;
             this.chkLeftEye.Enabled = false;
-            this.chkLeftEye.Location = new System.Drawing.Point(427, 229);
+            this.chkLeftEye.Location = new System.Drawing.Point(430, 246);
             this.chkLeftEye.Name = "chkLeftEye";
             this.chkLeftEye.Size = new System.Drawing.Size(110, 17);
             this.chkLeftEye.TabIndex = 15;
@@ -267,7 +276,7 @@
             // 
             this.chkRightEye.AutoSize = true;
             this.chkRightEye.Enabled = false;
-            this.chkRightEye.Location = new System.Drawing.Point(427, 252);
+            this.chkRightEye.Location = new System.Drawing.Point(430, 269);
             this.chkRightEye.Name = "chkRightEye";
             this.chkRightEye.Size = new System.Drawing.Size(117, 17);
             this.chkRightEye.TabIndex = 16;
@@ -663,11 +672,109 @@
             this.lblRightPupilX.Text = "0";
             this.lblRightPupilX.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(576, 72);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(43, 13);
+            this.label14.TabIndex = 57;
+            this.label14.Text = "Head Z";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblHeadZ
+            // 
+            this.lblHeadZ.AutoSize = true;
+            this.lblHeadZ.Location = new System.Drawing.Point(657, 72);
+            this.lblHeadZ.Name = "lblHeadZ";
+            this.lblHeadZ.Size = new System.Drawing.Size(13, 13);
+            this.lblHeadZ.TabIndex = 56;
+            this.lblHeadZ.Text = "0";
+            this.lblHeadZ.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(576, 46);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(43, 13);
+            this.label19.TabIndex = 59;
+            this.label19.Text = "Head X";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblHeadX
+            // 
+            this.lblHeadX.AutoSize = true;
+            this.lblHeadX.Location = new System.Drawing.Point(657, 46);
+            this.lblHeadX.Name = "lblHeadX";
+            this.lblHeadX.Size = new System.Drawing.Size(13, 13);
+            this.lblHeadX.TabIndex = 58;
+            this.lblHeadX.Text = "0";
+            this.lblHeadX.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(576, 59);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(43, 13);
+            this.label27.TabIndex = 61;
+            this.label27.Text = "Head Y";
+            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblHeadY
+            // 
+            this.lblHeadY.AutoSize = true;
+            this.lblHeadY.Location = new System.Drawing.Point(657, 59);
+            this.lblHeadY.Name = "lblHeadY";
+            this.lblHeadY.Size = new System.Drawing.Size(13, 13);
+            this.lblHeadY.TabIndex = 60;
+            this.lblHeadY.Text = "0";
+            this.lblHeadY.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(562, 28);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(78, 13);
+            this.label23.TabIndex = 62;
+            this.label23.Text = "Head Tracking";
+            // 
+            // btnSweetSpot
+            // 
+            this.btnSweetSpot.Location = new System.Drawing.Point(274, 17);
+            this.btnSweetSpot.Name = "btnSweetSpot";
+            this.btnSweetSpot.Size = new System.Drawing.Size(75, 23);
+            this.btnSweetSpot.TabIndex = 63;
+            this.btnSweetSpot.Text = "Sweet Spot";
+            this.btnSweetSpot.UseVisualStyleBackColor = true;
+            this.btnSweetSpot.Click += new System.EventHandler(this.btnSweetSpot_Click);
+            // 
+            // btnOffset
+            // 
+            this.btnOffset.Location = new System.Drawing.Point(368, 17);
+            this.btnOffset.Name = "btnOffset";
+            this.btnOffset.Size = new System.Drawing.Size(75, 23);
+            this.btnOffset.TabIndex = 64;
+            this.btnOffset.Text = "Set Deltas";
+            this.btnOffset.UseVisualStyleBackColor = true;
+            this.btnOffset.Click += new System.EventHandler(this.btnOffset_Click);
+            // 
             // Gui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(929, 324);
+            this.ClientSize = new System.Drawing.Size(876, 330);
+            this.Controls.Add(this.btnOffset);
+            this.Controls.Add(this.btnSweetSpot);
+            this.Controls.Add(this.label23);
+            this.Controls.Add(this.label27);
+            this.Controls.Add(this.lblHeadY);
+            this.Controls.Add(this.label19);
+            this.Controls.Add(this.lblHeadX);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.lblHeadZ);
             this.Controls.Add(this.label21);
             this.Controls.Add(this.lblRightPupilY);
             this.Controls.Add(this.label25);
@@ -796,5 +903,14 @@
         private System.Windows.Forms.Label lblRightPupilY;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label lblRightPupilX;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label lblHeadZ;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label lblHeadX;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label lblHeadY;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Button btnSweetSpot;
+        private System.Windows.Forms.Button btnOffset;
     }
 }
